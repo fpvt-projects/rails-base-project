@@ -1,0 +1,24 @@
+%h1 Sign Up
+
+= form_with model: @user, url: sign_up_path do |form|
+  - if @user.errors.any?
+    = @user.errors.full_messages.each do |error|
+      %div= error
+  
+  %div
+    = form.label :email 
+    = form.text_field :email 
+  %div
+    = form.label :firstname 
+    = form.text_field :firstname 
+  %div
+    = form.label :lastname 
+    = form.text_field :lastname 
+  %div
+    = form.label :password 
+    = form.password_field :password 
+  %div
+    = form.label :password_confirmation 
+    = form.password_field :password_confirmation 
+  %div
+    = form.submit 

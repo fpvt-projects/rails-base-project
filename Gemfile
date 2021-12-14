@@ -16,6 +16,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'hamlit-rails'
 gem 'sqlite3'
+<<<<<<< HEAD
+=======
+gem 'bcrypt', '~> 3.1.7'
+>>>>>>> 74a3e5e5a79a95a483baaa3c481af3dce142dbdf
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
