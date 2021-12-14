@@ -2,23 +2,23 @@
 
 = form_with model: @user, url: sign_up_path do |form|
   - if @user.errors.any?
-    %div 
-      - @user.errors.full_messages.each do |x|
-        %div= x
+    = @user.errors.full_messages.each do |error|
+      %div= error
+  
   %div
-    = form.label :Email
-    = form.text_field :email, placeholder: 'Email'
+    = form.label :email 
+    = form.text_field :email 
   %div
-    = form.label :Firstname
-    = form.text_field :firstname, placeholder: 'Firstname'
+    = form.label :firstname 
+    = form.text_field :firstname 
   %div
-    = form.label :Lastname
-    = form.text_field :lastname, placeholder: 'Lastname'
+    = form.label :lastname 
+    = form.text_field :lastname 
   %div
-    = form.label :Password
-    = form.password_field :password, placeholder: 'Password'
+    = form.label :password 
+    = form.password_field :password 
   %div
-    = form.label :Confirm_password
-    = form.password_field :password_confirmation, placeholder: 'Confirm password'
+    = form.label :password_confirmation 
+    = form.password_field :password_confirmation 
   %div
-    = form.submit "Sign Up"
+    = form.submit 
