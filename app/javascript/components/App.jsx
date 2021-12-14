@@ -10,9 +10,9 @@ function App() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    loggedIn ? null : navigate("/login");
-  }, [loggedIn]);
+  // useEffect(() => {
+  //   loggedIn ? null : navigate("/login");
+  // }, [loggedIn]);
 
   return (
     <Routes>
