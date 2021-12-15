@@ -1,28 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import Sidebar from "../components/Sidebar";
-import Dashboard from "../components/Dashboard";
-import Wallet from "../components/Wallet";
+import Trade from "../components/Trade";
+import Portfolio from "../components/Portfolio";
+import UserList from "../components/UserList";
 
 function Home() {
+  const [booladmin, setBooladmin] = useState(false);
   const navigate = useNavigate();
 
-  const handleClick = () => navigate("/sign_up");
-
-  const handleClickDashboard = () => navigate("/dashboard");
-  const handleClickWallet = () => navigate("/wallet");
+  const handleClickTrade = () => navigate("/trade");
+  const handleClickPortfolio = () => navigate("/portfolio");
+  const changeBoolAdmin = () => setBooladmin(!booladmin);
 
   return (
     <Container>
       <Sidebar
-        handleClickDashboard={handleClickDashboard}
-        handleClickWallet={handleClickWallet}
+        handleClickTrade={handleClickTrade}
+        handleClickPortfolio={handleClickPortfolio}
+        changeBoolAdmin={changeBoolAdmin}
+        booladmin={booladmin}
       />
       <ContentContainer>
         <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/wallet" element={<Wallet />} />
+          <Route path="/trade" element={<Trade />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route
+            path="/user-list"
+            element={<UserList booladmin={booladmin} />}
+          />
         </Routes>
       </ContentContainer>
     </Container>

@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-function Sidebar({ handleClickDashboard, handleClickWallet }) {
+function Sidebar({
+  booladmin,
+  changeBoolAdmin,
+  handleClickTrade,
+  handleClickPortfolio,
+}) {
   const navigate = useNavigate();
+
+  const handleClickLogout = () => navigate("/login");
+  const handleClickUserlist = () => navigate("/user-list");
 
   return (
     <Container>
@@ -13,8 +21,17 @@ function Sidebar({ handleClickDashboard, handleClickWallet }) {
         <Email>User@gmail.com</Email>
       </UserInfo>
       <NavigationContainer>
-        <NavButton onClick={handleClickDashboard}>Dashboard</NavButton>
-        <NavButton onClick={handleClickWallet}>Wallet</NavButton>
+        <NavButton onClick={changeBoolAdmin}>Set Admin True/False</NavButton>
+        <NavButton onClick={handleClickTrade}>Trade</NavButton>
+        <NavButton onClick={handleClickPortfolio}>Portfolio</NavButton>
+        {booladmin ? (
+          <UserlistButton onClick={handleClickUserlist}>
+            View user list
+          </UserlistButton>
+        ) : (
+          ""
+        )}
+        <NavButton onClick={handleClickLogout}>Sign Out</NavButton>
       </NavigationContainer>
     </Container>
   );
@@ -63,6 +80,20 @@ const NavButton = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
+  text-transform: uppercase;
+
+  :hover {
+    background-color: #b2b2b2;
+  }
+`;
+
+const UserlistButton = styled.button`
+  width: 100%;
+  height: 50px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
 
   :hover {
     background-color: #b2b2b2;

@@ -10,7 +10,7 @@ function Login() {
   };
 
   const handleClickSignIn = () => {
-    alert("Signed In");
+    navigate("/");
   };
 
   return (
