@@ -10,7 +10,7 @@ function Login() {
   };
 
   const handleClickSignIn = () => {
-    alert("Signed In");
+    navigate("/");
   };
 
   return (
@@ -52,7 +52,7 @@ const FormContainer = styled.div`
   width: 500px;
   height: 350px;
   background-color: white;
-  border-radius: 15px;
+  border-radius: 5px;
   box-shadow: 0px 0px 22px -2px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 0px 0px 22px -2px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 0px 22px -2px rgba(0, 0, 0, 0.75);
@@ -110,7 +110,7 @@ const Tag = styled.h1`
   display: flex;
 `;
 
-const RegisterTag = styled.h1`
+const RegisterTag = styled.p`
   font-size: 14px;
   cursor: pointer;
   margin-left: 5px;

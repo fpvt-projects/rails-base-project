@@ -10,13 +10,13 @@ function App() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    loggedIn ? null : navigate("/login");
-  }, [loggedIn]);
+  // useEffect(() => {
+  //   loggedIn ? null : navigate("/login");
+  // }, [loggedIn]);
 
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="*" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/sign_up" element={<Register />} />
     </Routes>
