@@ -17,8 +17,6 @@ gem 'devise'
 gem 'hamlit-rails'
 gem 'sqlite3'
 gem 'bcrypt', '~> 3.1.7'
-gem 'coinmarketcap'
-gem 'coin_market_pro'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
