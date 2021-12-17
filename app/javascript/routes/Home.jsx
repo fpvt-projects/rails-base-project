@@ -42,6 +42,9 @@ const Container = styled.div`
   display: flex;
 `;
 
-const ContentContainer = styled.div``;
+const ContentContainer = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 export default Home;

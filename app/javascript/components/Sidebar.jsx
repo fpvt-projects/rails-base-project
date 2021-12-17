@@ -38,6 +38,7 @@ function Sidebar({
 }
 
 const Container = styled.div`
+  min-width: 300px;
   width: 300px;
   height: 100%;
   background-color: #e0e0e0;
