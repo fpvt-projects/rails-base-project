@@ -4,7 +4,7 @@ module Api
             def index
                 user = User.all
 
-                render json: {status: 'SUCCESS', message:'Users loaded', data: users}, status: :ok
+                render json: {status: 'SUCCESS', message:'Users loaded', data: user}, status: :ok
             end
         end
     end
