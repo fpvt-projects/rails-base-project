@@ -4,18 +4,10 @@ import styled from "styled-components";
 function User({ firstname, lastname, email, admin }) {
   return (
     <Container>
-      <Column>
-        <p>{firstname}</p>
-      </Column>
-      <Column>
-        <p>{lastname}</p>
-      </Column>
-      <Column>
-        <p>{email}</p>
-      </Column>
-      <Column>
-        <p>{admin}</p>
-      </Column>
+      <Column>{firstname}</Column>
+      <Column>{lastname}</Column>
+      <Column>{email}</Column>
+      <Column>{admin.toString()}</Column>
       <Column>
         <button>Edit</button>
         <button>Delete</button>
@@ -34,5 +26,6 @@ const Column = styled.div`
   width: 20%;
   display: flex;
   justify-content: space-between;
+  text-align: center;
 `;
 export default User;

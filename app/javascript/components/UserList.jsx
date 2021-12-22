@@ -6,29 +6,6 @@ import SearchBar from "./UserList/SearchBar";
 import Users from "./UserList/Users";
 
 function UserList({ booladmin, userlist }) {
-  // const [userList, setUserlist] = useState([
-  //   {
-  //     id: 1,
-  //     firstname: "firstname1",
-  //     lastname: "lastname1",
-  //     email: "email1@gmail.com",
-  //     admin: false,
-  //   },
-  //   {
-  //     id: 2,
-  //     firstname: "firstname2",
-  //     lastname: "lastname2",
-  //     email: "email2@gmail.com",
-  //     admin: false,
-  //   },
-  //   {
-  //     id: 3,
-  //     firstname: "firstname3",
-  //     lastname: "lastname3",
-  //     email: "email3@gmail.com",
-  //     admin: false,
-  //   },
-  // ]);
   const navigate = useNavigate();
 
   useEffect(() => {

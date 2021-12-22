@@ -5,6 +5,24 @@ import styled from "styled-components";
 function Users({ userlist }) {
   return (
     <Container>
+      <Header>
+        <HeaderColumn>
+          <p>Firstname</p>
+        </HeaderColumn>
+        <HeaderColumn>
+          <p>Lastname</p>
+        </HeaderColumn>
+        <HeaderColumn>
+          <p>Email</p>
+        </HeaderColumn>
+        <HeaderColumn>
+          <p>Admin</p>
+        </HeaderColumn>
+        <HeaderColumn>
+          <p>Action</p>
+        </HeaderColumn>
+      </Header>
+
       {userlist.map((user) => (
         <User
           firstname={user.firstname}
@@ -23,4 +41,14 @@ const Container = styled.div`
   height: auto;
 `;
 
+const HeaderColumn = styled.div`
+  width: 20%;
+  text-align: center;
+`;
+
+const Header = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+`;
 export default Users;
