@@ -6,7 +6,7 @@ import Trade from "../components/Trade";
 import Portfolio from "../components/Portfolio";
 import UserList from "../components/UserList";
 
-function Home() {
+function Home({ userlist }) {
   const [booladmin, setBooladmin] = useState(false);
   const navigate = useNavigate();
 
@@ -28,7 +28,7 @@ function Home() {
           <Route path="/portfolio" element={<Portfolio />} />
           <Route
             path="/user-list"
-            element={<UserList booladmin={booladmin} />}
+            element={<UserList booladmin={booladmin} userlist={userlist} />}
           />
         </Routes>
       </ContentContainer>

@@ -17,7 +17,8 @@ const Container = styled.div`
   background-color: #b7a7a7;
   display: flex;
   justify-content: center;
-  padding: 5px;
+  align-items: center;
+  padding: 3px;
 `;
 
 const SearchBox = styled.input`

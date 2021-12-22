@@ -7,6 +7,7 @@ import Home from "./Home";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [userlist, setUserlist] = useState([]);
 
   const navigate = useNavigate();
 
@@ -14,9 +15,34 @@ function App() {
   //   loggedIn ? null : navigate("/login");
   // }, [loggedIn]);
 
+  useEffect(() => {
+    getAllUsers();
+  }, []);
+
+  const getAllUsers = () => {
+    fetch("http://localhost:3000/api/v1/users", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((respose) => respose.json())
+      .then((result) => {
+        let updateUserlist = [];
+        result.data.forEach((user) => {
+          updateUserlist.push({
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email,
+            admin: user.admin,
+          });
+          setUserlist(updateUserlist);
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <Routes>
-      <Route path="*" element={<Home />} />
+      <Route path="*" element={<Home userlist={userlist} />} />
       <Route path="/login" element={<Login />} />
       <Route path="/sign_up" element={<Register />} />
     </Routes>
