@@ -5,7 +5,7 @@ import CreateUserForm from "./UserList/CreateUserForm";
 import SearchBar from "./UserList/SearchBar";
 import Users from "./UserList/Users";
 
-function UserList({ booladmin, userlist }) {
+function UserList({ booladmin, userlist, handleRegister }) {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,7 +20,7 @@ function UserList({ booladmin, userlist }) {
       </ContentContainer>
 
       <SearchBar />
-      <CreateUserForm />
+      <CreateUserForm handleRegister={handleRegister} />
     </Container>
   );
 }

@@ -25,11 +25,11 @@ function Users({ userlist }) {
 
       {userlist.map((user) => (
         <User
+          key={user.id}
           firstname={user.firstname}
           lastname={user.lastname}
           email={user.email}
           admin={user.admin}
-          key={user.id}
         />
       ))}
     </Container>

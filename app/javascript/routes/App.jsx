@@ -8,6 +8,27 @@ import Home from "./Home";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userlist, setUserlist] = useState([]);
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [password_confirmation, setPassword_confirmation] = useState("");
+
+  const inputFirstname = (e) => {
+    setFirstname(e.target.value);
+  };
+  const inputLastname = (e) => {
+    setLastname(e.target.value);
+  };
+  const inputEmail = (e) => {
+    setEmail(e.target.value);
+  };
+  const inputPassword = (e) => {
+    setPassword(e.target.value);
+  };
+  const inputPasswordConfirmation = (e) => {
+    setPassword_confirmation(e.target.value);
+  };
 
   const navigate = useNavigate();
 
@@ -40,11 +61,48 @@ function App() {
       .catch((error) => console.log(error));
   };
 
+  const handleRegister = () => {
+    fetch("http://localhost:3000/api/v1/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        api_v1_users: {
+          firstname: firstname,
+          lastname: lastname,
+          email: email,
+          password: password,
+          password_confirmation: password_confirmation,
+        },
+      }),
+    })
+      .then((result) => {
+        console.log(result.status);
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <Routes>
-      <Route path="*" element={<Home userlist={userlist} />} />
+      <Route
+        path="*"
+        element={<Home userlist={userlist} handleRegister={handleRegister} />}
+      />
       <Route path="/login" element={<Login />} />
-      <Route path="/sign_up" element={<Register />} />
+      <Routes
+        path="/sign_up"
+        element={
+          <Register
+            inputFirstname={inputFirstname}
+            inputLastname={inputLastname}
+            inputEmail={inputEmail}
+            inputPassword={inputPassword}
+            inputPasswordConfirmation={inputPasswordConfirmation}
+            handleRegister={handleRegister}
+          />
+        }
+      />
     </Routes>
   );
 }

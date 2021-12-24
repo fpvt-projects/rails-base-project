@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-function CreateUserForm() {
+function CreateUserForm({ handleRegister }) {
   const [sidebar, setSidebar] = useState(false);
 
   const OpenSideBar = () => setSidebar(!sidebar);
 
-  const AddNewUser = () => alert("Successfully added new user!");
   const ClearForm = () => alert("Form cleared!");
 
   useEffect(() => {
@@ -26,7 +25,7 @@ function CreateUserForm() {
         <UserInput type="text" placeholder="Email" />
         <UserInput type="password" placeholder="Password" />
         <UserInput type="password" placeholder="Password confirmation" />
-        <SubmitBttn onClick={AddNewUser}>Save</SubmitBttn>
+        <SubmitBttn onClick={handleRegister}>Save</SubmitBttn>
         <ClearBttn onClick={ClearForm}>Clear</ClearBttn>
       </FormContainer>
 

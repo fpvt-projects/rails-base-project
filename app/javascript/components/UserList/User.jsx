@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-function User({ firstname, lastname, email, admin }) {
+function User({ firstname, lastname, email, admin, key }) {
   return (
     <Container>
       <Column>{firstname}</Column>
