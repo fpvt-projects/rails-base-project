@@ -50,6 +50,7 @@ function App() {
         let updateUserlist = [];
         result.data.forEach((user) => {
           updateUserlist.push({
+            id: user.id,
             firstname: user.firstname,
             lastname: user.lastname,
             email: user.email,
@@ -79,6 +80,7 @@ function App() {
     })
       .then((result) => {
         console.log(result.status);
+        getAllUsers;
       })
       .catch((error) => console.log(error));
   };
@@ -87,10 +89,21 @@ function App() {
     <Routes>
       <Route
         path="*"
-        element={<Home userlist={userlist} handleRegister={handleRegister} />}
+        element={
+          <Home
+            userlist={userlist}
+            handleRegister={handleRegister}
+            inputFirstname={inputFirstname}
+            inputLastname={inputLastname}
+            inputEmail={inputEmail}
+            inputPassword={inputPassword}
+            inputPasswordConfirmation={inputPasswordConfirmation}
+            getAllUsers={getAllUsers}
+          />
+        }
       />
       <Route path="/login" element={<Login />} />
-      <Routes
+      <Route
         path="/sign_up"
         element={
           <Register
@@ -107,11 +120,4 @@ function App() {
   );
 }
 
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-  display: flex;
-  overflow: hidden;
-`;
 export default App;

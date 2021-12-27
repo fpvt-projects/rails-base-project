@@ -6,7 +6,15 @@ import Trade from "../components/Trade";
 import Portfolio from "../components/Portfolio";
 import UserList from "../components/UserList";
 
-function Home({ userlist, handleRegister }) {
+function Home({
+  userlist,
+  handleRegister,
+  inputFirstname,
+  inputLastname,
+  inputEmail,
+  inputPassword,
+  inputPasswordConfirmation,
+}) {
   const [booladmin, setBooladmin] = useState(false);
   const navigate = useNavigate();
 
@@ -32,6 +40,11 @@ function Home({ userlist, handleRegister }) {
               <UserList
                 booladmin={booladmin}
                 userlist={userlist}
+                inputFirstname={inputFirstname}
+                inputLastname={inputLastname}
+                inputEmail={inputEmail}
+                inputPassword={inputPassword}
+                inputPasswordConfirmation={inputPasswordConfirmation}
                 handleRegister={handleRegister}
               />
             }

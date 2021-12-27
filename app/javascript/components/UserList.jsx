@@ -5,7 +5,16 @@ import CreateUserForm from "./UserList/CreateUserForm";
 import SearchBar from "./UserList/SearchBar";
 import Users from "./UserList/Users";
 
-function UserList({ booladmin, userlist, handleRegister }) {
+function UserList({
+  booladmin,
+  userlist,
+  handleRegister,
+  inputEmail,
+  inputLastname,
+  inputFirstname,
+  inputPassword,
+  inputPasswordConfirmation,
+}) {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,7 +29,14 @@ function UserList({ booladmin, userlist, handleRegister }) {
       </ContentContainer>
 
       <SearchBar />
-      <CreateUserForm handleRegister={handleRegister} />
+      <CreateUserForm
+        inputFirstname={inputFirstname}
+        inputLastname={inputLastname}
+        inputEmail={inputEmail}
+        inputPassword={inputPassword}
+        inputPasswordConfirmation={inputPasswordConfirmation}
+        handleRegister={handleRegister}
+      />
     </Container>
   );
 }

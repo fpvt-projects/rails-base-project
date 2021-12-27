@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-function CreateUserForm({ handleRegister }) {
+function CreateUserForm({
+  handleRegister,
+  inputEmail,
+  inputLastname,
+  inputFirstname,
+  inputPassword,
+  inputPasswordConfirmation,
+}) {
   const [sidebar, setSidebar] = useState(false);
 
   const OpenSideBar = () => setSidebar(!sidebar);
@@ -20,11 +27,27 @@ function CreateUserForm({ handleRegister }) {
     <div id="Container" style={Container}>
       <FormContainer>
         <h1 style={{ marginBotton: "10px" }}>ADD NEW USER</h1>
-        <UserInput type="text" placeholder="Firstname" />
-        <UserInput type="text" placeholder="Lastname" />
-        <UserInput type="text" placeholder="Email" />
-        <UserInput type="password" placeholder="Password" />
-        <UserInput type="password" placeholder="Password confirmation" />
+        <UserInput
+          onChange={inputFirstname}
+          type="text"
+          placeholder="Firstname"
+        />
+        <UserInput
+          onChange={inputLastname}
+          type="text"
+          placeholder="Lastname"
+        />
+        <UserInput onChange={inputEmail} type="text" placeholder="Email" />
+        <UserInput
+          onChange={inputPassword}
+          type="password"
+          placeholder="Password"
+        />
+        <UserInput
+          onChange={inputPasswordConfirmation}
+          type="password"
+          placeholder="Password confirmation"
+        />
         <SubmitBttn onClick={handleRegister}>Save</SubmitBttn>
         <ClearBttn onClick={ClearForm}>Clear</ClearBttn>
       </FormContainer>
