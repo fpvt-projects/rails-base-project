@@ -20,8 +20,10 @@ function Sidebar({
     <Container>
       <UserInfo>
         <UserImage />
-        <UserName>FirstName LastName</UserName>
-        <Email>User@gmail.com</Email>
+        <UserName>
+          {user.firstname} {user.lastname}
+        </UserName>
+        <Email>{user.email}</Email>
       </UserInfo>
       <NavigationContainer>
         <NavButton onClick={handleClickTrade}>Trade</NavButton>
