@@ -7,9 +7,13 @@ Rails.application.routes.draw do
     !request.xhr? && request.format.html?
   end
 
+  post '/login',    to: 'sessions#create'
+  post '/logout',   to: 'sessions#destroy'
+  get '/logged_in', to: 'sessions#is_logged_in?'
+
   namespace 'api' do
     namespace 'v1' do 
-      resources :users
+      resources :users, only: [:create, :show, :index, :destroy]
     end
   end
 end

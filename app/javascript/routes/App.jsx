@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Routes, useNavigate, Route } from "react-router-dom";
+import axios from "axios";
 import styled from "styled-components";
 import Login from "./Login";
 import Register from "./Register";
 import Home from "./Home";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  // login and authentication
+  const [isLoggedIn, setisLoggedIn] = useState(false);
+  const [user, setUser] = useState("");
+
+  // registration
   const [userlist, setUserlist] = useState([]);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -30,18 +35,21 @@ function App() {
     setPassword_confirmation(e.target.value);
   };
 
-  const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   loggedIn ? null : navigate("/login");
-  // }, [loggedIn]);
-
   useEffect(() => {
-    getAllUsers();
+    componentDidMount();
   }, []);
 
+  const handleLogin = (data) => {
+    setisLoggedIn(true);
+    setUser(data.user);
+  };
+  const handleLogout = () => {
+    setisLoggedIn(false);
+    setUser("");
+  };
+
   const getAllUsers = () => {
-    fetch("http://localhost:3000/api/v1/users", {
+    fetch("http://localhost:3001/api/v1/users", {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
@@ -63,7 +71,7 @@ function App() {
   };
 
   const handleRegister = () => {
-    fetch("http://localhost:3000/api/v1/users", {
+    fetch("http://localhost:3001/api/v1/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -85,6 +93,40 @@ function App() {
       .catch((error) => console.log(error));
   };
 
+  const loginStatus = () => {
+    axios
+      .get("http://localhost:3001/logged_in", { withCredentials: true })
+      .then((response) => {
+        if (response.data.logged_in) {
+          handleLogin(response);
+        } else {
+          handleLogout();
+        }
+      })
+      .catch((error) => console.log("api errors:", error));
+  };
+
+  const componentDidMount = () => {
+    loginStatus();
+  };
+
+  // const handleLogin = () => {
+  //   fetch("http://localhost:3000/api/v1/users", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       api_v1_users: {
+  //         email: userEmail,
+  //         password: userPassword,
+  //       },
+  //     }),
+  //   })
+  //     .then((res) => console.log(res))
+  //     .catch((error) => console.log(error));
+  // };
+
   return (
     <Routes>
       <Route
@@ -99,10 +141,11 @@ function App() {
             inputPassword={inputPassword}
             inputPasswordConfirmation={inputPasswordConfirmation}
             getAllUsers={getAllUsers}
+            user={user}
           />
         }
       />
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<Login handleLogin={handleLogin} />} />
       <Route
         path="/sign_up"
         element={

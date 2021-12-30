@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import Sidebar from "../components/Sidebar";
@@ -14,21 +14,25 @@ function Home({
   inputEmail,
   inputPassword,
   inputPasswordConfirmation,
+  getAllUsers,
+  user,
 }) {
-  const [booladmin, setBooladmin] = useState(false);
   const navigate = useNavigate();
 
   const handleClickTrade = () => navigate("/trade");
   const handleClickPortfolio = () => navigate("/portfolio");
-  const changeBoolAdmin = () => setBooladmin(!booladmin);
+
+  useEffect(() => {
+    console.log(user);
+  });
 
   return (
     <Container>
       <Sidebar
         handleClickTrade={handleClickTrade}
         handleClickPortfolio={handleClickPortfolio}
-        changeBoolAdmin={changeBoolAdmin}
-        booladmin={booladmin}
+        user={user}
+        getAllUsers={getAllUsers}
       />
       <ContentContainer>
         <Routes>
@@ -38,7 +42,6 @@ function Home({
             path="/user-list"
             element={
               <UserList
-                booladmin={booladmin}
                 userlist={userlist}
                 inputFirstname={inputFirstname}
                 inputLastname={inputLastname}
@@ -46,6 +49,7 @@ function Home({
                 inputPassword={inputPassword}
                 inputPasswordConfirmation={inputPasswordConfirmation}
                 handleRegister={handleRegister}
+                user={user}
               />
             }
           />

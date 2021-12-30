@@ -30,6 +30,11 @@ module RailsProject
     # the framework and any gems in your application.
 
     # Don't generate system test files.
+    config.middleware.use ActionDispatch::Cookies    
+    config.middleware.use ActionDispatch::Session::CookieStore
+    
     config.generators.system_tests = nil
+
+    config.api_only = false
   end
 end

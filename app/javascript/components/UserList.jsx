@@ -6,7 +6,6 @@ import SearchBar from "./UserList/SearchBar";
 import Users from "./UserList/Users";
 
 function UserList({
-  booladmin,
   userlist,
   handleRegister,
   inputEmail,
@@ -14,11 +13,12 @@ function UserList({
   inputFirstname,
   inputPassword,
   inputPasswordConfirmation,
+  user,
 }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    booladmin ? "n" : navigate("/");
+    user.admin ? "n" : navigate("/");
   }, []);
 
   return (

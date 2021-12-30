@@ -3,15 +3,18 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 function Sidebar({
-  booladmin,
-  changeBoolAdmin,
   handleClickTrade,
   handleClickPortfolio,
+  user,
+  getAllUsers,
 }) {
   const navigate = useNavigate();
 
   const handleClickLogout = () => navigate("/login");
-  const handleClickUserlist = () => navigate("/user-list");
+  const handleClickUserlist = () => {
+    getAllUsers;
+    navigate("/user-list");
+  };
 
   return (
     <Container>
@@ -21,10 +24,9 @@ function Sidebar({
         <Email>User@gmail.com</Email>
       </UserInfo>
       <NavigationContainer>
-        <NavButton onClick={changeBoolAdmin}>Set Admin True/False</NavButton>
         <NavButton onClick={handleClickTrade}>Trade</NavButton>
         <NavButton onClick={handleClickPortfolio}>Portfolio</NavButton>
-        {booladmin ? (
+        {user.admin ? (
           <UserlistButton onClick={handleClickUserlist}>
             View user list
           </UserlistButton>
