@@ -42,6 +42,8 @@ function App() {
   const handleLogin = (data) => {
     setisLoggedIn(true);
     setUser(data.user);
+
+    getAllUsers();
   };
   const handleLogout = () => {
     setisLoggedIn(false);
@@ -55,8 +57,10 @@ function App() {
     })
       .then((respose) => respose.json())
       .then((result) => {
+        // console.log(result.users);
         let updateUserlist = [];
-        result.data.forEach((user) => {
+
+        result.users.forEach((user) => {
           updateUserlist.push({
             id: user.id,
             firstname: user.firstname,
@@ -64,8 +68,9 @@ function App() {
             email: user.email,
             admin: user.admin,
           });
-          setUserlist(updateUserlist);
         });
+
+        setUserlist(updateUserlist);
       })
       .catch((error) => console.log(error));
   };
@@ -140,7 +145,7 @@ function App() {
             inputEmail={inputEmail}
             inputPassword={inputPassword}
             inputPasswordConfirmation={inputPasswordConfirmation}
-            getAllUsers={getAllUsers}
+            // getAllUsers={getAllUsers}
             user={user}
           />
         }

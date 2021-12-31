@@ -14,7 +14,7 @@ function Home({
   inputEmail,
   inputPassword,
   inputPasswordConfirmation,
-  getAllUsers,
+  // getAllUsers,
   user,
 }) {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ function Home({
   const handleClickPortfolio = () => navigate("/portfolio");
 
   useEffect(() => {
-    console.log(user);
+    // getAllUsers;
   });
 
   return (
@@ -32,7 +32,6 @@ function Home({
         handleClickTrade={handleClickTrade}
         handleClickPortfolio={handleClickPortfolio}
         user={user}
-        getAllUsers={getAllUsers}
       />
       <ContentContainer>
         <Routes>

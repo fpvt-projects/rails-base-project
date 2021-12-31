@@ -2,17 +2,11 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-function Sidebar({
-  handleClickTrade,
-  handleClickPortfolio,
-  user,
-  getAllUsers,
-}) {
+function Sidebar({ handleClickTrade, handleClickPortfolio, user }) {
   const navigate = useNavigate();
 
   const handleClickLogout = () => navigate("/login");
   const handleClickUserlist = () => {
-    getAllUsers;
     navigate("/user-list");
   };
 
