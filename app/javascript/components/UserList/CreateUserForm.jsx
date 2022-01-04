@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-function CreateUserForm() {
-  const [sidebar, setSidebar] = useState(false);
+function CreateUserForm({
+  handleRegister,
+  inputEmail,
+  inputLastname,
+  inputFirstname,
+  inputPassword,
+  inputPasswordConfirmation,
+  getAllUsers,
+  sidebar,
+  openSideBar,
+}) {
+  const handleClickRegister = () => {
+    handleRegister();
+    getAllUsers();
+  };
 
-  const OpenSideBar = () => setSidebar(!sidebar);
-
-  const AddNewUser = () => alert("Successfully added new user!");
   const ClearForm = () => alert("Form cleared!");
 
   useEffect(() => {
@@ -21,19 +31,36 @@ function CreateUserForm() {
     <div id="Container" style={Container}>
       <FormContainer>
         <h1 style={{ marginBotton: "10px" }}>ADD NEW USER</h1>
-        <UserInput type="text" placeholder="Firstname" />
-        <UserInput type="text" placeholder="Lastname" />
-        <UserInput type="text" placeholder="Email" />
-        <UserInput type="password" placeholder="Password" />
-        <UserInput type="password" placeholder="Password confirmation" />
-        <SubmitBttn onClick={AddNewUser}>Save</SubmitBttn>
+        <UserInput
+          onChange={inputFirstname}
+          type="text"
+          placeholder="Firstname"
+        />
+        <UserInput
+          onChange={inputLastname}
+          type="text"
+          placeholder="Lastname"
+        />
+        <UserInput onChange={inputEmail} type="text" placeholder="Email" />
+        <UserInput
+          onChange={inputPassword}
+          type="password"
+          placeholder="Password"
+        />
+        <UserInput
+          onChange={inputPasswordConfirmation}
+          type="password"
+          placeholder="Password confirmation"
+        />
+        <SubmitBttn onClick={handleClickRegister}>Save</SubmitBttn>
         <ClearBttn onClick={ClearForm}>Clear</ClearBttn>
+        <BackBttn onClick={openSideBar}>Back</BackBttn>
       </FormContainer>
 
-      <OpenSideBarButton
+      {/* <OpenSideBarButton
         sidebar={sidebar}
         onClick={OpenSideBar}
-      ></OpenSideBarButton>
+      ></OpenSideBarButton> */}
     </div>
   );
 }
@@ -47,25 +74,24 @@ const Container = {
   right: "-50%",
 };
 
-const OpenSideBarButton = styled.button`
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  background-color: #e0e0e0;
-  position: absolute;
-  top: 50%;
-  transform: translate(0, -50%);
-  cursor: pointer;
-  left: -75px;
-  outline: none;
-  border: none;
+// const OpenSideBarButton = styled.button`
+//   width: 150px;
+//   height: 150px;
+//   border-radius: 50%;
+//   background-color: #e0e0e0;
+//   position: absolute;
+//   bottom: 0;
+//   cursor: pointer;
+//   left: -75px;
+//   outline: none;
+//   border: none;
 
-  clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);
+//   clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);
 
-  :hover {
-    background-color: grey;
-  }
-`;
+//   :hover {
+//     background-color: grey;
+//   }
+// `;
 
 const FormContainer = styled.div`
   width: 60%;
@@ -126,6 +152,28 @@ const ClearBttn = styled.button`
 
   :hover {
     background-color: #db1a1a;
+  }
+`;
+
+const BackBttn = styled.button`
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  height: 34px;
+  width: 200px;
+
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background-color: #5ea8ed;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  transition: all 0.4s ease;
+
+  :hover {
+    background-color: #4784bc;
   }
 `;
 export default CreateUserForm;

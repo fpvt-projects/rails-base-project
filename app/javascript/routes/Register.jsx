@@ -2,13 +2,16 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-function Register({}) {
+function Register({
+  inputEmail,
+  inputLastname,
+  inputFirstname,
+  inputPassword,
+  inputPasswordConfirmation,
+  handleRegister,
+}) {
   const navigate = useNavigate();
   const handleClickBack = () => navigate("/login");
-
-  const handleRegister = () => {
-    alert("Registration successful!");
-  };
 
   return (
     <Container>
@@ -16,17 +19,42 @@ function Register({}) {
         <FormDiv>
           <h1 style={{ marginBottom: "20px" }}>Registration Form</h1>
           <InputDiv>
-            <NameInput type="text" placeholder="Firstname" />
-            <NameInput type="text" placeholder="Lastname" />
+            <NameInput
+              name="firstname"
+              type="text"
+              placeholder="Firstname"
+              onChange={inputFirstname}
+            />
+            <NameInput
+              name="lastname"
+              type="text"
+              placeholder="Lastname"
+              onChange={inputLastname}
+            />
           </InputDiv>
           <InputDiv>
-            <UserInput type="text" placeholder="Email" />
+            <UserInput
+              name="email"
+              type="text"
+              placeholder="Email"
+              onChange={inputEmail}
+            />
           </InputDiv>
           <InputDiv>
-            <UserInput type="password" placeholder="Password" />
+            <UserInput
+              name="password"
+              type="password"
+              placeholder="Password"
+              onChange={inputPassword}
+            />
           </InputDiv>
           <InputDiv>
-            <UserInput type="password" placeholder="Password Confirm" />
+            <UserInput
+              name="password_confirmation"
+              type="password"
+              placeholder="Password Confirm"
+              onChange={inputPasswordConfirmation}
+            />
           </InputDiv>
           <CheckboxDiv>
             <AgreementTag>

@@ -3,28 +3,34 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 function Sidebar({
-  booladmin,
-  changeBoolAdmin,
   handleClickTrade,
   handleClickPortfolio,
+  user,
+  handleLogout,
 }) {
   const navigate = useNavigate();
 
-  const handleClickLogout = () => navigate("/login");
-  const handleClickUserlist = () => navigate("/user-list");
+  const handleClickLogout = () => {
+    handleLogout();
+    navigate("/login");
+  };
+  const handleClickUserlist = () => {
+    navigate("/user-list");
+  };
 
   return (
     <Container>
       <UserInfo>
-        <UserImage />
-        <UserName>FirstName LastName</UserName>
-        <Email>User@gmail.com</Email>
+        <UserImage src="https://www.terahzsol.com/images/team.png" />
+        <UserName>
+          {user.firstname} {user.lastname}
+        </UserName>
+        <Email>{user.email}</Email>
       </UserInfo>
       <NavigationContainer>
-        <NavButton onClick={changeBoolAdmin}>Set Admin True/False</NavButton>
         <NavButton onClick={handleClickTrade}>Trade</NavButton>
         <NavButton onClick={handleClickPortfolio}>Portfolio</NavButton>
-        {booladmin ? (
+        {user.admin ? (
           <UserlistButton onClick={handleClickUserlist}>
             View user list
           </UserlistButton>
@@ -59,6 +65,7 @@ const UserImage = styled.img`
   height: 100px;
   border-radius: 50%;
   background-color: #b7a7a7;
+  border: 3px solid #b7a7a7;
 `;
 
 const UserName = styled.h1`

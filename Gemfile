@@ -18,6 +18,7 @@ gem 'hamlit-rails'
 gem 'sqlite3'
 gem 'bcrypt', '~> 3.1.7'
 gem 'coingecko_ruby'
+gem 'rack-cors'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

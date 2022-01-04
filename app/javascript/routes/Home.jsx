@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import Sidebar from "../components/Sidebar";
@@ -6,21 +6,34 @@ import Trade from "../components/Trade";
 import Portfolio from "../components/Portfolio";
 import UserList from "../components/UserList";
 
-function Home({ userlist }) {
-  const [booladmin, setBooladmin] = useState(false);
+function Home({
+  userlist,
+  handleRegister,
+  inputFirstname,
+  inputLastname,
+  inputEmail,
+  inputPassword,
+  inputPasswordConfirmation,
+  handleLogout,
+  getAllUsers,
+  user,
+}) {
   const navigate = useNavigate();
 
   const handleClickTrade = () => navigate("/trade");
   const handleClickPortfolio = () => navigate("/portfolio");
-  const changeBoolAdmin = () => setBooladmin(!booladmin);
+
+  useEffect(() => {
+    // getAllUsers;
+  });
 
   return (
     <Container>
       <Sidebar
         handleClickTrade={handleClickTrade}
         handleClickPortfolio={handleClickPortfolio}
-        changeBoolAdmin={changeBoolAdmin}
-        booladmin={booladmin}
+        handleLogout={handleLogout}
+        user={user}
       />
       <ContentContainer>
         <Routes>
@@ -28,7 +41,19 @@ function Home({ userlist }) {
           <Route path="/portfolio" element={<Portfolio />} />
           <Route
             path="/user-list"
-            element={<UserList booladmin={booladmin} userlist={userlist} />}
+            element={
+              <UserList
+                userlist={userlist}
+                inputFirstname={inputFirstname}
+                inputLastname={inputLastname}
+                inputEmail={inputEmail}
+                inputPassword={inputPassword}
+                inputPasswordConfirmation={inputPasswordConfirmation}
+                handleRegister={handleRegister}
+                getAllUsers={getAllUsers}
+                user={user}
+              />
+            }
           />
         </Routes>
       </ContentContainer>

@@ -1,26 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-function Login() {
+function Login({ handleLogin }) {
+  const [errors, setErrors] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+
   const navigate = useNavigate();
 
   const handleClickRegister = () => {
     navigate("/sign_up");
   };
 
+  const inputUserEmail = (e) => {
+    setUserEmail(e.target.value);
+  };
+  const inputUserPassword = (e) => {
+    setUserPassword(e.target.value);
+  };
+
   const handleClickSignIn = () => {
-    navigate("/");
+    axios
+      .post(
+        "http://localhost:3001/login",
+        {
+          api_v1_users: {
+            email: userEmail,
+            password: userPassword,
+          },
+        },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        if (response.data.logged_in) {
+          handleLogin(response.data);
+          navigate("/");
+        } else {
+          setErrors(response.data.errors);
+          console.log(response.data.errors);
+        }
+      })
+      .catch((error) => console.log("api errors:", error));
   };
 
   return (
     <Container>
       <FormContainer>
         <InputDiv>
-          <UserInput type="text" placeholder="Email" />
+          <UserInput
+            onChange={inputUserEmail}
+            type="text"
+            placeholder="Email"
+          />
         </InputDiv>
         <InputDiv>
-          <UserInput type="password" placeholder="Password" />
+          <UserInput
+            onChange={inputUserPassword}
+            type="password"
+            placeholder="Password"
+          />
         </InputDiv>
         <InputDiv>
           <SubmitBtn onClick={handleClickSignIn}>Sign In</SubmitBtn>

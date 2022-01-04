@@ -23,15 +23,17 @@ function Users({ userlist }) {
         </HeaderColumn>
       </Header>
 
-      {userlist.map((user) => (
-        <User
-          firstname={user.firstname}
-          lastname={user.lastname}
-          email={user.email}
-          admin={user.admin}
-          key={user.id}
-        />
-      ))}
+      <Userlist>
+        {userlist.map((user) => (
+          <User
+            key={user.id}
+            firstname={user.firstname}
+            lastname={user.lastname}
+            email={user.email}
+            admin={user.admin}
+          />
+        ))}
+      </Userlist>
     </Container>
   );
 }
@@ -41,6 +43,11 @@ const Container = styled.div`
   height: auto;
 `;
 
+const Userlist = styled.div`
+  width: 100%;
+  max-height: 500px;
+  overflow-y: auto;
+`;
 const HeaderColumn = styled.div`
   width: 20%;
   text-align: center;
@@ -50,5 +57,7 @@ const Header = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-around;
+  margin: 1rem 0;
+  font-weight: bold;
 `;
 export default Users;
