@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, useNavigate, Route } from "react-router-dom";
+import { Routes, useNavigate, Route, Navigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import Login from "./Login";
@@ -19,6 +19,8 @@ function App() {
   const [password, setPassword] = useState("");
   const [password_confirmation, setPassword_confirmation] = useState("");
 
+  const navigate = useNavigate();
+
   const inputFirstname = (e) => {
     setFirstname(e.target.value);
   };
@@ -37,11 +39,17 @@ function App() {
 
   useEffect(() => {
     componentDidMount();
+    loginRedirect();
   }, []);
+
+  const loginRedirect = () => {
+    user ? console.log(user) : navigate("/login");
+  };
 
   const handleLogin = (data) => {
     setisLoggedIn(true);
     setUser(data.user);
+    console.log(data.user);
 
     getAllUsers();
   };
@@ -145,6 +153,7 @@ function App() {
             inputEmail={inputEmail}
             inputPassword={inputPassword}
             inputPasswordConfirmation={inputPasswordConfirmation}
+            handleLogout={handleLogout}
             // getAllUsers={getAllUsers}
             user={user}
           />

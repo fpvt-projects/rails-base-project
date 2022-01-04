@@ -2,10 +2,18 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-function Sidebar({ handleClickTrade, handleClickPortfolio, user }) {
+function Sidebar({
+  handleClickTrade,
+  handleClickPortfolio,
+  user,
+  handleLogout,
+}) {
   const navigate = useNavigate();
 
-  const handleClickLogout = () => navigate("/login");
+  const handleClickLogout = () => {
+    handleLogout();
+    navigate("/login");
+  };
   const handleClickUserlist = () => {
     navigate("/user-list");
   };
@@ -13,7 +21,7 @@ function Sidebar({ handleClickTrade, handleClickPortfolio, user }) {
   return (
     <Container>
       <UserInfo>
-        <UserImage />
+        <UserImage src="https://www.terahzsol.com/images/team.png" />
         <UserName>
           {user.firstname} {user.lastname}
         </UserName>
@@ -57,6 +65,7 @@ const UserImage = styled.img`
   height: 100px;
   border-radius: 50%;
   background-color: #b7a7a7;
+  border: 3px solid #b7a7a7;
 `;
 
 const UserName = styled.h1`
