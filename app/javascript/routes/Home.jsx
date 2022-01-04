@@ -14,6 +14,7 @@ function Home({
   inputEmail,
   inputPassword,
   inputPasswordConfirmation,
+  setAdmin,
   handleLogout,
   getAllUsers,
   user,
@@ -49,6 +50,7 @@ function Home({
                 inputEmail={inputEmail}
                 inputPassword={inputPassword}
                 inputPasswordConfirmation={inputPasswordConfirmation}
+                setAdmin={setAdmin}
                 handleRegister={handleRegister}
                 getAllUsers={getAllUsers}
                 user={user}

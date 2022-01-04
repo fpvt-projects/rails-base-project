@@ -8,13 +8,29 @@ function CreateUserForm({
   inputFirstname,
   inputPassword,
   inputPasswordConfirmation,
+  setAdmin,
   getAllUsers,
   sidebar,
   openSideBar,
 }) {
+  const [userType, setUserType] = useState("");
+
+  useEffect(() => {
+    if (userType == "user") {
+      setAdmin(false);
+    } else {
+      setAdmin(true);
+    }
+  }, [userType]);
+
+  const selectUserType = (e) => {
+    setUserType(e.target.value);
+  };
+
   const handleClickRegister = () => {
     handleRegister();
     getAllUsers();
+    window.location.reload();
   };
 
   const ClearForm = () => alert("Form cleared!");
@@ -52,15 +68,14 @@ function CreateUserForm({
           type="password"
           placeholder="Password confirmation"
         />
+        <DropdownSelect value={userType} onChange={selectUserType}>
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </DropdownSelect>
         <SubmitBttn onClick={handleClickRegister}>Save</SubmitBttn>
         <ClearBttn onClick={ClearForm}>Clear</ClearBttn>
         <BackBttn onClick={openSideBar}>Back</BackBttn>
       </FormContainer>
-
-      {/* <OpenSideBarButton
-        sidebar={sidebar}
-        onClick={OpenSideBar}
-      ></OpenSideBarButton> */}
     </div>
   );
 }
@@ -73,25 +88,6 @@ const Container = {
   transition: "all 0.3s ease",
   right: "-50%",
 };
-
-// const OpenSideBarButton = styled.button`
-//   width: 150px;
-//   height: 150px;
-//   border-radius: 50%;
-//   background-color: #e0e0e0;
-//   position: absolute;
-//   bottom: 0;
-//   cursor: pointer;
-//   left: -75px;
-//   outline: none;
-//   border: none;
-
-//   clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);
-
-//   :hover {
-//     background-color: grey;
-//   }
-// `;
 
 const FormContainer = styled.div`
   width: 60%;
@@ -175,5 +171,10 @@ const BackBttn = styled.button`
   :hover {
     background-color: #4784bc;
   }
+`;
+
+const DropdownSelect = styled.select`
+  height: 34px;
+  cursor: pointer;
 `;
 export default CreateUserForm;
