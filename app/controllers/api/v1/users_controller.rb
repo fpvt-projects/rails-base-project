@@ -5,7 +5,6 @@ module Api
 
             def index
                 user = User.all
-
                 render json: {status: 'SUCCESS', message:'Users loaded!', data: user}, status: :ok
             end
 
@@ -25,7 +24,7 @@ module Api
             private 
 
             def user_params
-                params.require(:users).permit(:firstname, :lastname, :email, :password, :password_confirmation, :admin)
+                params.require(:api_v1_users).permit(:firstname, :lastname, :email, :password, :password_confirmation, :admin)
             end
         end
     end
