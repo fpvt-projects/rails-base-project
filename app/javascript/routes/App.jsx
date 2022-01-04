@@ -154,7 +154,7 @@ function App() {
             inputPassword={inputPassword}
             inputPasswordConfirmation={inputPasswordConfirmation}
             handleLogout={handleLogout}
-            // getAllUsers={getAllUsers}
+            getAllUsers={getAllUsers}
             user={user}
           />
         }

@@ -15,7 +15,7 @@ function Home({
   inputPassword,
   inputPasswordConfirmation,
   handleLogout,
-  // getAllUsers,
+  getAllUsers,
   user,
 }) {
   const navigate = useNavigate();
@@ -50,6 +50,7 @@ function Home({
                 inputPassword={inputPassword}
                 inputPasswordConfirmation={inputPasswordConfirmation}
                 handleRegister={handleRegister}
+                getAllUsers={getAllUsers}
                 user={user}
               />
             }

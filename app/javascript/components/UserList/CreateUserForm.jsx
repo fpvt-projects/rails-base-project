@@ -8,10 +8,14 @@ function CreateUserForm({
   inputFirstname,
   inputPassword,
   inputPasswordConfirmation,
+  getAllUsers,
+  sidebar,
+  openSideBar,
 }) {
-  const [sidebar, setSidebar] = useState(false);
-
-  const OpenSideBar = () => setSidebar(!sidebar);
+  const handleClickRegister = () => {
+    handleRegister();
+    getAllUsers();
+  };
 
   const ClearForm = () => alert("Form cleared!");
 
@@ -48,14 +52,15 @@ function CreateUserForm({
           type="password"
           placeholder="Password confirmation"
         />
-        <SubmitBttn onClick={handleRegister}>Save</SubmitBttn>
+        <SubmitBttn onClick={handleClickRegister}>Save</SubmitBttn>
         <ClearBttn onClick={ClearForm}>Clear</ClearBttn>
+        <BackBttn onClick={openSideBar}>Back</BackBttn>
       </FormContainer>
 
-      <OpenSideBarButton
+      {/* <OpenSideBarButton
         sidebar={sidebar}
         onClick={OpenSideBar}
-      ></OpenSideBarButton>
+      ></OpenSideBarButton> */}
     </div>
   );
 }
@@ -69,25 +74,24 @@ const Container = {
   right: "-50%",
 };
 
-const OpenSideBarButton = styled.button`
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  background-color: #e0e0e0;
-  position: absolute;
-  top: 50%;
-  transform: translate(0, -50%);
-  cursor: pointer;
-  left: -75px;
-  outline: none;
-  border: none;
+// const OpenSideBarButton = styled.button`
+//   width: 150px;
+//   height: 150px;
+//   border-radius: 50%;
+//   background-color: #e0e0e0;
+//   position: absolute;
+//   bottom: 0;
+//   cursor: pointer;
+//   left: -75px;
+//   outline: none;
+//   border: none;
 
-  clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);
+//   clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);
 
-  :hover {
-    background-color: grey;
-  }
-`;
+//   :hover {
+//     background-color: grey;
+//   }
+// `;
 
 const FormContainer = styled.div`
   width: 60%;
@@ -148,6 +152,28 @@ const ClearBttn = styled.button`
 
   :hover {
     background-color: #db1a1a;
+  }
+`;
+
+const BackBttn = styled.button`
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  height: 34px;
+  width: 200px;
+
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background-color: #5ea8ed;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  transition: all 0.4s ease;
+
+  :hover {
+    background-color: #4784bc;
   }
 `;
 export default CreateUserForm;
