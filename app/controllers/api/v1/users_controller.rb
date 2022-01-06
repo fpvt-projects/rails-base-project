@@ -2,19 +2,13 @@ module Api
     module V1
         class UsersController < ApplicationController
 
+            skip_before_action :verify_authenticity_token, only: [:create]
+            before_action :authenticate_user, except: [:create]
+            
             def index
                 @users = User.all
+                render json: {data:@users, status: "Ok"}
 
-                if @users
-                    render json: {
-                    users: @users
-                }
-                else
-                    render json: {
-                    status: 500,
-                    errors: ['no users found']
-                }
-                end
             end
 
             def show
@@ -36,9 +30,7 @@ module Api
                 @user = User.new(user_params)
 
                 if @user.save
-                    login!  
                     render json: {
-                    status: :created,
                     user: @user
                 }
                 else 

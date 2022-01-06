@@ -11,7 +11,7 @@ function Sidebar({
   const navigate = useNavigate();
 
   const handleClickLogout = () => {
-    handleLogout();
+    sessionStorage.clear();
     navigate("/login");
   };
   const handleClickUserlist = () => {

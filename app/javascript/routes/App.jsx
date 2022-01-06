@@ -8,11 +8,12 @@ import Home from "./Home";
 
 function App() {
   // login and authentication
-  const [isLoggedIn, setisLoggedIn] = useState(false);
+  // const [isLoggedIn, setisLoggedIn] = useState(false);
   const [user, setUser] = useState("");
+  const [userlist, setUserlist] = useState([]);
 
   // registration
-  const [userlist, setUserlist] = useState([]);
+
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -20,7 +21,14 @@ function App() {
   const [password_confirmation, setPassword_confirmation] = useState("");
   const [admin, setAdmin] = useState(false);
 
+  // signin
+  const [userEmail, setUserEmail] = useState("");
+
   const navigate = useNavigate();
+
+  const inputUserEmail = (e) => {
+    setUserEmail(e.target.value);
+  };
 
   const inputFirstname = (e) => {
     setFirstname(e.target.value);
@@ -39,37 +47,43 @@ function App() {
   };
 
   useEffect(() => {
-    componentDidMount();
+    // componentDidMount();
     loginRedirect();
+    getAllUsers();
   }, []);
 
   const loginRedirect = () => {
-    user ? console.log(user) : navigate("/login");
+    sessionStorage.getItem("JSONwebtoken") != null
+      ? console.log("")
+      : navigate("/login");
   };
 
-  const handleLogin = (data) => {
-    setisLoggedIn(true);
-    setUser(data.user);
-    console.log(data.user);
+  // const handleLogin = (data) => {
+  //   setisLoggedIn(true);
+  //   setUser(data.user);
+  //   console.log(data.user);
 
-    getAllUsers();
-  };
-  const handleLogout = () => {
-    setisLoggedIn(false);
-    setUser("");
-  };
+  //   getAllUsers();
+  // };
+  // const handleLogout = () => {
+  //   setisLoggedIn(false);
+  //   setUser("");
+  // };
 
   const getAllUsers = () => {
     fetch("http://localhost:3001/api/v1/users", {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: sessionStorage.getItem("JSONwebtoken"),
+      },
     })
       .then((respose) => respose.json())
       .then((result) => {
-        // console.log(result.users);
+        // console.log(result);
         let updateUserlist = [];
 
-        result.users.forEach((user) => {
+        result.data.forEach((user) => {
           updateUserlist.push({
             id: user.id,
             firstname: user.firstname,
@@ -77,8 +91,11 @@ function App() {
             email: user.email,
             admin: user.admin,
           });
-        });
 
+          if (user.email == sessionStorage.getItem("currentUser")) {
+            setUser(user);
+          }
+        });
         setUserlist(updateUserlist);
       })
       .catch((error) => console.log(error));
@@ -108,22 +125,22 @@ function App() {
       .catch((error) => console.log(error));
   };
 
-  const loginStatus = () => {
-    axios
-      .get("http://localhost:3001/logged_in", { withCredentials: true })
-      .then((response) => {
-        if (response.data.logged_in) {
-          handleLogin(response);
-        } else {
-          handleLogout();
-        }
-      })
-      .catch((error) => console.log("api errors:", error));
-  };
+  // const loginStatus = () => {
+  //   axios
+  //     .get("http://localhost:3001/logged_in", { withCredentials: true })
+  //     .then((response) => {
+  //       if (response.data.logged_in) {
+  //         handleLogin(response);
+  //       } else {
+  //         handleLogout();
+  //       }
+  //     })
+  //     .catch((error) => console.log("api errors:", error));
+  // };
 
-  const componentDidMount = () => {
-    loginStatus();
-  };
+  // const componentDidMount = () => {
+  //   loginStatus();
+  // };
 
   // const handleLogin = () => {
   //   fetch("http://localhost:3000/api/v1/users", {
@@ -150,19 +167,34 @@ function App() {
           <Home
             userlist={userlist}
             handleRegister={handleRegister}
-            inputFirstname={inputFirstname}
-            inputLastname={inputLastname}
-            inputEmail={inputEmail}
-            inputPassword={inputPassword}
-            inputPasswordConfirmation={inputPasswordConfirmation}
+            inputFirstname={setFirstname}
+            inputLastname={setLastname}
+            inputEmail={setEmail}
+            inputPassword={setPassword}
+            inputPasswordConfirmation={setPassword_confirmation}
             setAdmin={setAdmin}
-            handleLogout={handleLogout}
+            email={email}
+            firstname={firstname}
+            lastname={lastname}
+            password={password}
+            password_confirmation={password_confirmation}
+            // handleLogout={handleLogout}
             getAllUsers={getAllUsers}
             user={user}
           />
         }
       />
-      <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+      <Route
+        path="/login"
+        element={
+          <Login
+            getAllUsers={getAllUsers}
+            inputUserEmail={inputUserEmail}
+            userEmail={userEmail}
+            // handleLogin={handleLogin}
+          />
+        }
+      />
       <Route
         path="/sign_up"
         element={

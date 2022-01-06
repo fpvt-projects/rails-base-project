@@ -1,2 +1,0 @@
-class CoinPrice < ApplicationRecord
-end

@@ -15,7 +15,12 @@ function Home({
   inputPassword,
   inputPasswordConfirmation,
   setAdmin,
-  handleLogout,
+  email,
+  firstname,
+  lastname,
+  password,
+  password_confirmation,
+  // handleLogout,
   getAllUsers,
   user,
 }) {
@@ -33,7 +38,7 @@ function Home({
       <Sidebar
         handleClickTrade={handleClickTrade}
         handleClickPortfolio={handleClickPortfolio}
-        handleLogout={handleLogout}
+        // handleLogout={handleLogout}
         user={user}
       />
       <ContentContainer>
@@ -50,6 +55,11 @@ function Home({
                 inputEmail={inputEmail}
                 inputPassword={inputPassword}
                 inputPasswordConfirmation={inputPasswordConfirmation}
+                email={email}
+                firstname={firstname}
+                lastname={lastname}
+                password={password}
+                password_confirmation={password_confirmation}
                 setAdmin={setAdmin}
                 handleRegister={handleRegister}
                 getAllUsers={getAllUsers}

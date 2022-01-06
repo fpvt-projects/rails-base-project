@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 function CreateUserForm({
@@ -9,6 +10,11 @@ function CreateUserForm({
   inputPassword,
   inputPasswordConfirmation,
   setAdmin,
+  email,
+  firstname,
+  lastname,
+  password,
+  password_confirmation,
   getAllUsers,
   sidebar,
   openSideBar,
@@ -23,14 +29,27 @@ function CreateUserForm({
     }
   }, [userType]);
 
+  const navigate = useNavigate();
+
   const selectUserType = (e) => {
     setUserType(e.target.value);
   };
 
+  const emtpyForm = () => {
+    inputEmail("");
+    inputFirstname("");
+    inputLastname("");
+    inputPassword("");
+    inputPassword("");
+    inputPasswordConfirmation("");
+    setAdmin(false);
+  };
   const handleClickRegister = () => {
     handleRegister();
     getAllUsers();
-    window.location.reload();
+    emtpyForm();
+    openSideBar();
+    navigate("/user-list");
   };
 
   const ClearForm = () => alert("Form cleared!");
@@ -48,25 +67,34 @@ function CreateUserForm({
       <FormContainer>
         <h1 style={{ marginBotton: "10px" }}>ADD NEW USER</h1>
         <UserInput
-          onChange={inputFirstname}
+          onChange={(e) => inputFirstname(e.target.value)}
           type="text"
           placeholder="Firstname"
+          value={firstname}
         />
         <UserInput
-          onChange={inputLastname}
+          onChange={(e) => inputLastname(e.target.value)}
           type="text"
           placeholder="Lastname"
+          value={lastname}
         />
-        <UserInput onChange={inputEmail} type="text" placeholder="Email" />
         <UserInput
-          onChange={inputPassword}
+          onChange={(e) => inputEmail(e.target.value)}
+          type="text"
+          placeholder="Email"
+          value={email}
+        />
+        <UserInput
+          onChange={(e) => inputPassword(e.target.value)}
           type="password"
           placeholder="Password"
+          value={password}
         />
         <UserInput
-          onChange={inputPasswordConfirmation}
+          onChange={(e) => inputPasswordConfirmation(e.target.value)}
           type="password"
           placeholder="Password confirmation"
+          value={password_confirmation}
         />
         <DropdownSelect value={userType} onChange={selectUserType}>
           <option value="user">User</option>
