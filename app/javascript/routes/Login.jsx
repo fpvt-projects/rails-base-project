@@ -1,22 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function Login({ handleLogin }) {
+function Login({
+  getAllUsers,
+  inputUserEmail,
+  userEmail,
+  // handleLogin
+}) {
   const [errors, setErrors] = useState("");
-  const [userEmail, setUserEmail] = useState("");
+  // const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
   const navigate = useNavigate();
+
+  const loginRedirect = () => {
+    sessionStorage.getItem("JSONwebtoken") != null
+      ? navigate("/")
+      : console.log("");
+  };
+
+  useEffect(() => {
+    loginRedirect();
+  }, []);
 
   const handleClickRegister = () => {
     navigate("/sign_up");
   };
 
-  const inputUserEmail = (e) => {
-    setUserEmail(e.target.value);
-  };
+  // const inputUserEmail = (e) => {
+  //   setUserEmail(e.target.value);
+  // };
   const inputUserPassword = (e) => {
     setUserPassword(e.target.value);
   };
@@ -24,9 +39,9 @@ function Login({ handleLogin }) {
   const handleClickSignIn = () => {
     axios
       .post(
-        "http://localhost:3001/login",
+        "http://localhost:3001/user_token",
         {
-          api_v1_users: {
+          auth: {
             email: userEmail,
             password: userPassword,
           },
@@ -34,13 +49,11 @@ function Login({ handleLogin }) {
         { withCredentials: true }
       )
       .then((response) => {
-        if (response.data.logged_in) {
-          handleLogin(response.data);
-          navigate("/");
-        } else {
-          setErrors(response.data.errors);
-          console.log(response.data.errors);
-        }
+        console.log(response.data.jwt);
+        sessionStorage.setItem("JSONwebtoken", response.data.jwt);
+        sessionStorage.setItem("currentUser", userEmail);
+        getAllUsers();
+        navigate("/");
       })
       .catch((error) => console.log("api errors:", error));
   };

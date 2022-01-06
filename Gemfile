@@ -18,6 +18,8 @@ gem 'hamlit-rails'
 gem 'sqlite3'
 gem 'bcrypt', '~> 3.1.7'
 gem 'rack-cors'
+gem 'knock', github: "nsarno/knock", branch: "master",
+  ref: "9214cd027422df8dc31eb67c60032fbbf8fc100b"
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
