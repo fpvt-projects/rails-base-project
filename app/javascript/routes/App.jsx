@@ -18,6 +18,7 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPassword_confirmation] = useState("");
+  const [admin, setAdmin] = useState(false);
 
   const navigate = useNavigate();
 
@@ -96,6 +97,7 @@ function App() {
           email: email,
           password: password,
           password_confirmation: password_confirmation,
+          admin: admin,
         },
       }),
     })
@@ -153,6 +155,7 @@ function App() {
             inputEmail={inputEmail}
             inputPassword={inputPassword}
             inputPasswordConfirmation={inputPasswordConfirmation}
+            setAdmin={setAdmin}
             handleLogout={handleLogout}
             getAllUsers={getAllUsers}
             user={user}

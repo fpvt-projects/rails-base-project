@@ -40,12 +40,12 @@ function Users({ userlist }) {
 
 const Container = styled.div`
   width: 100%;
-  height: auto;
+  height: 100%;
 `;
 
 const Userlist = styled.div`
   width: 100%;
-  max-height: 500px;
+  max-height: 70%;
   overflow-y: auto;
 `;
 const HeaderColumn = styled.div`

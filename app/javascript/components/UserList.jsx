@@ -13,6 +13,7 @@ function UserList({
   inputFirstname,
   inputPassword,
   inputPasswordConfirmation,
+  setAdmin,
   getAllUsers,
   user,
 }) {
@@ -40,6 +41,7 @@ function UserList({
         inputEmail={inputEmail}
         inputPassword={inputPassword}
         inputPasswordConfirmation={inputPasswordConfirmation}
+        setAdmin={setAdmin}
         handleRegister={handleRegister}
         getAllUsers={getAllUsers}
         sidebar={sidebar}
