@@ -1,0 +1,27 @@
+%h1 Listing crypto_stocks
+
+%table
+  %thead
+    %tr
+      %th Symbol
+      %th User
+      %th Cost per
+      %th Amount owned
+      %th
+      %th
+      %th
+
+  %tbody
+    - @crypto_stocks.each do |crypto_stock|
+      %tr
+        %td= crypto_stock.symbol
+        %td= crypto_stock.user_id
+        %td= crypto_stock.cost_per
+        %td= crypto_stock.amount_owned
+        %td= link_to 'Show', crypto_stock
+        %td= link_to 'Edit', edit_crypto_stock_path(crypto_stock)
+        %td= link_to 'Destroy', crypto_stock, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Crypto stock', new_crypto_stock_path

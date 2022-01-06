@@ -1,0 +1,19 @@
+%h1 Listing crypto_currencies
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @crypto_currencies.each do |crypto_currency|
+      %tr
+        %td= link_to 'Show', crypto_currency
+        %td= link_to 'Edit', edit_crypto_currency_path(crypto_currency)
+        %td= link_to 'Destroy', crypto_currency, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Crypto currency', new_crypto_currency_path

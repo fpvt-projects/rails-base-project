@@ -1,0 +1,10 @@
+= form_for @crypto_currency do |f|
+  - if @crypto_currency.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@crypto_currency.errors.count, "error")} prohibited this crypto_currency from being saved:"
+      %ul
+        - @crypto_currency.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

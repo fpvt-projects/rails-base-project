@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Symbol:
+  = @crypto_stock.symbol
+%p
+  %b User:
+  = @crypto_stock.user_id
+%p
+  %b Cost per:
+  = @crypto_stock.cost_per
+%p
+  %b Amount owned:
+  = @crypto_stock.amount_owned
+
+= link_to 'Edit', edit_crypto_stock_path(@crypto_stock)
+\|
+= link_to 'Back', crypto_stocks_path

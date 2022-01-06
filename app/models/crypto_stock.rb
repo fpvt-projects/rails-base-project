@@ -1,0 +1,2 @@
+class CryptoStock < ApplicationRecord
+end

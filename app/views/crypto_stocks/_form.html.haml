@@ -1,0 +1,22 @@
+= form_for @crypto_stock do |f|
+  - if @crypto_stock.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@crypto_stock.errors.count, "error")} prohibited this crypto_stock from being saved:"
+      %ul
+        - @crypto_stock.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :symbol
+    = f.text_field :symbol
+  .field
+    = f.label :user_id
+    = f.number_field :user_id
+  .field
+    = f.label :cost_per
+    = f.text_field :cost_per
+  .field
+    = f.label :amount_owned
+    = f.text_field :amount_owned
+  .actions
+    = f.submit 'Save'
