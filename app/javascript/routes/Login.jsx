@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import jwt from "jwt-decode";
 
 function Login({
   getAllUsers,
@@ -16,9 +17,7 @@ function Login({
   const navigate = useNavigate();
 
   const loginRedirect = () => {
-    sessionStorage.getItem("JSONwebtoken") != null
-      ? navigate("/")
-      : console.log("");
+    sessionStorage.getItem("token") != null ? navigate("/") : console.log("");
   };
 
   useEffect(() => {
@@ -49,9 +48,9 @@ function Login({
         { withCredentials: true }
       )
       .then((response) => {
-        console.log(response.data.jwt);
-        sessionStorage.setItem("JSONwebtoken", response.data.jwt);
-        sessionStorage.setItem("currentUser", userEmail);
+        const user = jwt(response.data.jwt);
+        sessionStorage.setItem("token", response.data.jwt);
+
         getAllUsers();
         navigate("/");
       })

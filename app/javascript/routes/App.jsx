@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Routes, useNavigate, Route, Navigate } from "react-router-dom";
+import jwt from "jwt-decode";
 import axios from "axios";
 import styled from "styled-components";
 import Login from "./Login";
@@ -53,7 +54,7 @@ function App() {
   }, []);
 
   const loginRedirect = () => {
-    sessionStorage.getItem("JSONwebtoken") != null
+    sessionStorage.getItem("token") != null
       ? console.log("")
       : navigate("/login");
   };
@@ -75,7 +76,7 @@ function App() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: sessionStorage.getItem("JSONwebtoken"),
+        Authorization: sessionStorage.getItem("token"),
       },
     })
       .then((respose) => respose.json())
@@ -92,7 +93,8 @@ function App() {
             admin: user.admin,
           });
 
-          if (user.email == sessionStorage.getItem("currentUser")) {
+          var user_id = jwt(sessionStorage.getItem("token"));
+          if (user.id == user_id.sub) {
             setUser(user);
           }
         });
