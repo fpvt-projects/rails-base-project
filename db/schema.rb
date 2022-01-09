@@ -10,26 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_06_120107) do
+ActiveRecord::Schema.define(version: 2022_01_09_020528) do
 
   create_table "crypto_currencies", force: :cascade do |t|
     t.string "currency_name"
-    t.integer "currency_id"
     t.string "currency_symbol"
     t.string "contract_id"
     t.decimal "total_supply"
     t.integer "market_cap"
     t.string "currency_description"
-    t.decimal "buy_price"
-    t.decimal "sell_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "currency_price"
   end
 
   create_table "portfolios", force: :cascade do |t|
     t.integer "account_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "crypto_symbol"
+    t.decimal "crypto_amount"
+    t.decimal "symbol_balance"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -37,6 +38,10 @@ ActiveRecord::Schema.define(version: 2022_01_06_120107) do
     t.integer "transaction_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "transcation_type"
+    t.string "symbol"
+    t.decimal "amount"
+    t.integer "transaction_price"
   end
 
   create_table "users", force: :cascade do |t|
