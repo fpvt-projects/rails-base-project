@@ -30,8 +30,8 @@ function Home({
   const handleClickPortfolio = () => navigate("/portfolio");
 
   useEffect(() => {
-    // getAllUsers;
-  });
+    getAllUsers();
+  }, []);
 
   return (
     <Container>

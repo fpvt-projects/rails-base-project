@@ -1,9 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import axios from "axios";
 
-function User({ firstname, lastname, email, admin }) {
+function User({ firstname, lastname, email, admin, id }) {
   const handleEdit = () => alert("clicked Edit");
-  const handleDelete = () => alert("clicked Delete");
+  const handleDelete = () => {
+    alert("clicked Delete");
+  };
   return (
     <Container>
       <Column>{firstname}</Column>
@@ -34,6 +37,7 @@ const Column = styled.div`
   border-left: 0.5px solid #e0e0e0;
   border-right: 0.5px solid #e0e0e0;
   padding-left: 0.5rem;
+  overflow: hidden;
 `;
 
 const ActionColumn = styled.div`
