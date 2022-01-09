@@ -2,7 +2,7 @@ module Api
     module V1
         class UsersController < ApplicationController
 
-            skip_before_action :verify_authenticity_token, only: [:create]
+            skip_before_action :verify_authenticity_token, only: [:create, :destroy]
             before_action :authenticate_user, except: [:create]
             
             def index
@@ -39,6 +39,12 @@ module Api
                     errors: @user.errors.full_messages
                 }
                 end
+            end
+
+            def destroy
+                User.find_by(params[:email]).destroy
+
+                render json: {status: 'Deleted'}
             end
 
             private 

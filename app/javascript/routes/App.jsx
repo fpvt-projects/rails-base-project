@@ -50,7 +50,7 @@ function App() {
   useEffect(() => {
     // componentDidMount();
     loginRedirect();
-    getAllUsers();
+    // getAllUsers();
   }, []);
 
   const loginRedirect = () => {

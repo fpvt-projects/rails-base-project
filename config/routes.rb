@@ -22,7 +22,8 @@ Rails.application.routes.draw do
 
   namespace 'api' do
     namespace 'v1' do 
-      resources :users, only: [:create, :show, :index, :destroy]
+      resources :users, only: [:create, :show, :index]
+      delete '/destroy', to: 'users#destroy'
     end
   end
 end
