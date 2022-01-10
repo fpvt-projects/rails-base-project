@@ -5,3 +5,19 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+
+coin = CryptoCurrency.create(
+    [
+        {
+            currency_name: 'Dodge Tiger',
+            currency_symbol: 'DGT',
+            contract_id: 'x06123sxcasdfSACFSDs12976',
+            total_supply: '10000000',
+            market_cap: '5000',
+            currency_description: 'New Sh!t Coin',
+            currency_price: '0.05'
+        }
+    ]
+)
