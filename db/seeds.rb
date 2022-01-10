@@ -17,7 +17,7 @@ coin = CryptoCurrency.create(
             total_supply: '10000000',
             market_cap: '5000',
             currency_description: 'New Sh!t Coin',
-            currency_price: '0.05'
+            currency_price: '5'
         }
     ]
 )

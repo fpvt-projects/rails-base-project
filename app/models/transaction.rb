@@ -1,6 +1,12 @@
 class Transaction < ApplicationRecord
     belongs_to :user
+    before_save :update_transaction_price
     after_create :update_crypto
+
+    def update_transaction_price
+        cryptoPrice = CryptoCurrency.find_by(currency_symbol: self.symbol)
+        self.transaction_price = cryptoPrice.currency_price
+    end
 
     def update_crypto
         crypto = CryptoCurrency.find_by(currency_symbol: self.symbol)
