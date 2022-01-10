@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_09_020528) do
+ActiveRecord::Schema.define(version: 2022_01_10_085351) do
 
   create_table "crypto_currencies", force: :cascade do |t|
     t.string "currency_name"
@@ -25,16 +25,16 @@ ActiveRecord::Schema.define(version: 2022_01_09_020528) do
   end
 
   create_table "portfolios", force: :cascade do |t|
-    t.integer "account_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "crypto_symbol"
     t.decimal "crypto_amount"
     t.decimal "symbol_balance"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_portfolios_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "account_id"
     t.integer "transaction_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 2022_01_09_020528) do
     t.string "symbol"
     t.decimal "amount"
     t.integer "transaction_price"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,10 +57,14 @@ ActiveRecord::Schema.define(version: 2022_01_09_020528) do
   end
 
   create_table "wallets", force: :cascade do |t|
-    t.integer "account_id"
     t.decimal "balance"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_wallets_on_user_id"
   end
 
+  add_foreign_key "portfolios", "users"
+  add_foreign_key "transactions", "users"
+  add_foreign_key "wallets", "users"
 end
