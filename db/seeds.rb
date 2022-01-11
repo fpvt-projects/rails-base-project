@@ -13,7 +13,6 @@ coin = CryptoCurrency.create(
         {
             currency_name: 'Dodge-Tiger',
             currency_symbol: 'DGT',
-            contract_id: 'x06123sxcasdfSACFSDs12976',
             total_supply: '10000000',
             market_cap: '5000',
             currency_description: 'Coin For Dodge',
@@ -23,7 +22,6 @@ coin = CryptoCurrency.create(
         {
             currency_name: 'Ape-Master',
             currency_symbol: 'APM',
-            contract_id: 'x0123sjdasasd1qwsedad12',
             total_supply: '350000000',
             market_cap: '10000',
             currency_description: 'Coin for Apes',

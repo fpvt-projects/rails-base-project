@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_11_040329) do
+ActiveRecord::Schema.define(version: 2022_01_11_061823) do
 
   create_table "crypto_currencies", force: :cascade do |t|
     t.string "currency_name"
@@ -29,6 +29,9 @@ ActiveRecord::Schema.define(version: 2022_01_11_040329) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
     t.string "portfolio_id"
+    t.string "currency_symbol"
+    t.string "currency_name"
+    t.decimal "currency_amount"
     t.index ["user_id"], name: "index_portfolios_on_user_id"
   end
 
