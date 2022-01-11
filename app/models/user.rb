@@ -6,10 +6,10 @@
 class User < ApplicationRecord
     has_secure_password 
     has_one :wallet
-    has_many :portfolios
+    has_one :portfolio
     has_many :transactions
     after_create :create_wallet
-    # after_create :create_portfolio
+    after_create :create_portfolio
     
     validates :email,:password_digest,:firstname,:lastname, presence: true
     validates :email, format: {with: /\A[^@\s]+@[^@\s]+\z/, message: "must be a valid email address"}
@@ -19,7 +19,7 @@ class User < ApplicationRecord
         Wallet.create({user_id:self.id, balance: 100})
     end
 
-    # def create_portfolio
-    #     Portfolio.create({account_id:self.id})
-    # end
+    def create_portfolio
+        Portfolio.create({user_id:self.id})
+    end
 end

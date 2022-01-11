@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_10_085351) do
+ActiveRecord::Schema.define(version: 2022_01_11_040329) do
 
   create_table "crypto_currencies", force: :cascade do |t|
     t.string "currency_name"
@@ -27,22 +27,20 @@ ActiveRecord::Schema.define(version: 2022_01_10_085351) do
   create_table "portfolios", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "crypto_symbol"
-    t.decimal "crypto_amount"
-    t.decimal "symbol_balance"
     t.integer "user_id"
+    t.string "portfolio_id"
     t.index ["user_id"], name: "index_portfolios_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "transaction_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "transcation_type"
-    t.string "symbol"
-    t.decimal "amount"
-    t.integer "transaction_price"
     t.integer "user_id"
+    t.string "txn_hash"
+    t.string "txn_type"
+    t.string "currency_symbol"
+    t.decimal "currency_amount"
+    t.decimal "txn_price"
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
@@ -61,6 +59,7 @@ ActiveRecord::Schema.define(version: 2022_01_10_085351) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+    t.string "wallet_address"
     t.index ["user_id"], name: "index_wallets_on_user_id"
   end
 
