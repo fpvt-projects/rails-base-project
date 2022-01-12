@@ -4,6 +4,7 @@ class CryptoCurrenciesController < ApplicationController
   # GET /crypto_currencies or /crypto_currencies.json
   def index
     @crypto_currencies = CryptoCurrency.all
+    render json:{data:@crypto_currencies}
   end
 
   # GET /crypto_currencies/1 or /crypto_currencies/1.json

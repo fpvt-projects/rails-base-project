@@ -10,33 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_06_120107) do
+ActiveRecord::Schema.define(version: 2022_01_11_061823) do
 
   create_table "crypto_currencies", force: :cascade do |t|
     t.string "currency_name"
-    t.integer "currency_id"
     t.string "currency_symbol"
     t.string "contract_id"
     t.decimal "total_supply"
     t.integer "market_cap"
     t.string "currency_description"
-    t.decimal "buy_price"
-    t.decimal "sell_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "currency_price"
   end
 
   create_table "portfolios", force: :cascade do |t|
-    t.integer "account_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.string "portfolio_id"
+    t.string "currency_symbol"
+    t.string "currency_name"
+    t.decimal "currency_amount"
+    t.index ["user_id"], name: "index_portfolios_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "account_id"
-    t.integer "transaction_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.string "txn_hash"
+    t.string "txn_type"
+    t.string "currency_symbol"
+    t.decimal "currency_amount"
+    t.decimal "txn_price"
+    t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -50,10 +58,15 @@ ActiveRecord::Schema.define(version: 2022_01_06_120107) do
   end
 
   create_table "wallets", force: :cascade do |t|
-    t.integer "account_id"
     t.decimal "balance"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.string "wallet_address"
+    t.index ["user_id"], name: "index_wallets_on_user_id"
   end
 
+  add_foreign_key "portfolios", "users"
+  add_foreign_key "transactions", "users"
+  add_foreign_key "wallets", "users"
 end

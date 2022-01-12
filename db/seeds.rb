@@ -5,3 +5,39 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+
+coin = CryptoCurrency.create(
+    [
+        {
+            currency_name: 'Dodge-Tiger',
+            currency_symbol: 'DGT',
+            total_supply: '10000000',
+            market_cap: '5000',
+            currency_description: 'Coin For Dodge',
+            currency_price: '0.0005'
+        },
+
+        {
+            currency_name: 'Ape-Master',
+            currency_symbol: 'APM',
+            total_supply: '350000000',
+            market_cap: '10000',
+            currency_description: 'Coin for Apes',
+            currency_price: '0.00002857142'
+        }
+    ]
+)
+
+holders = User.create (
+    [
+        {
+            firstname:'Francis',
+            lastname:'Talan',
+            email:'francistalan@testmail.com',
+            password:'12345',
+            password_confirmation:'12345'
+        }
+    ]
+)

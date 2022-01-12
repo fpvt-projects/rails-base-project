@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   resources :crypto_currencies
   resources :transactions
   resources :wallets
