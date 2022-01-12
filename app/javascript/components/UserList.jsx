@@ -35,7 +35,7 @@ function UserList({
   return (
     <Container>
       <ContentContainer>
-        <Users userlist={userlist} />
+        <Users userlist={userlist} getAllUsers={getAllUsers} />
         <AddUserButton onClick={openSideBar}>+</AddUserButton>
       </ContentContainer>
 

@@ -2,7 +2,7 @@ import React from "react";
 import User from "./User";
 import styled from "styled-components";
 
-function Users({ userlist }) {
+function Users({ userlist, getAllUsers }) {
   return (
     <Container>
       <Header>
@@ -32,6 +32,7 @@ function Users({ userlist }) {
             lastname={user.lastname}
             email={user.email}
             admin={user.admin}
+            getAllUsers={getAllUsers}
           />
         ))}
       </Userlist>

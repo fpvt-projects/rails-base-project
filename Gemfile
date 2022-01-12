@@ -18,6 +18,7 @@ gem 'hamlit-rails'
 gem 'sqlite3'
 gem 'bcrypt', '~> 3.1.7'
 gem 'coingecko_ruby'
+gem 'rest-client'
 gem 'rack-cors'
 gem 'knock', github: "nsarno/knock", branch: "master",
   ref: "9214cd027422df8dc31eb67c60032fbbf8fc100b"

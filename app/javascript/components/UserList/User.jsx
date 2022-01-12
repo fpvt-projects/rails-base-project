@@ -1,11 +1,32 @@
 import React from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function User({ firstname, lastname, email, admin, id }) {
+function User({ firstname, lastname, email, admin, id, getAllUsers }) {
+  const navigate = useNavigate();
+
   const handleEdit = () => alert("clicked Edit");
+
   const handleDelete = () => {
-    alert("clicked Delete");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this item?"
+    );
+    confirmDelete
+      ? axios
+          .delete(`http://localhost:3001/api/v1/users/${id}`, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: sessionStorage.getItem("token"),
+            },
+          })
+          .then((res) => {
+            console.log(res);
+            getAllUsers();
+            navigate("/user-list");
+          })
+          .catch((error) => console.log(error))
+      : console.log("cancel delete");
   };
   return (
     <Container>

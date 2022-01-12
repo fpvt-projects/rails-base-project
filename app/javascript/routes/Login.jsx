@@ -6,12 +6,12 @@ import jwt from "jwt-decode";
 
 function Login({
   getAllUsers,
-  inputUserEmail,
-  userEmail,
+  // inputUserEmail,
   // handleLogin
 }) {
   const [errors, setErrors] = useState("");
   // const [userEmail, setUserEmail] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
   const navigate = useNavigate();
@@ -28,33 +28,39 @@ function Login({
     navigate("/sign_up");
   };
 
-  // const inputUserEmail = (e) => {
-  //   setUserEmail(e.target.value);
-  // };
+  const inputUserEmail = (e) => {
+    setUserEmail(e.target.value);
+  };
   const inputUserPassword = (e) => {
     setUserPassword(e.target.value);
   };
 
   const handleClickSignIn = () => {
-    axios
-      .post(
-        "http://localhost:3001/user_token",
-        {
-          auth: {
-            email: userEmail,
-            password: userPassword,
+    if (userEmail == null || userEmail == "") {
+      setErrors("Email is empty.");
+    } else if (userPassword == null || userPassword == "") {
+      setErrors("Password is empty.");
+    } else {
+      axios
+        .post(
+          "http://localhost:3001/user_token",
+          {
+            auth: {
+              email: userEmail,
+              password: userPassword,
+            },
           },
-        },
-        { withCredentials: true }
-      )
-      .then((response) => {
-        const user = jwt(response.data.jwt);
-        sessionStorage.setItem("token", response.data.jwt);
+          { withCredentials: true }
+        )
+        .then((response) => {
+          // const user = jwt(response.data.jwt);
+          sessionStorage.setItem("token", response.data.jwt);
 
-        getAllUsers();
-        navigate("/");
-      })
-      .catch((error) => console.log("api errors:", error));
+          getAllUsers();
+          navigate("/");
+        })
+        .catch((error) => console.log("api errors:", error));
+    }
   };
 
   return (
@@ -73,6 +79,9 @@ function Login({
             type="password"
             placeholder="Password"
           />
+        </InputDiv>
+        <InputDiv>
+          <h5 style={{ color: "red" }}>{errors}</h5>
         </InputDiv>
         <InputDiv>
           <SubmitBtn onClick={handleClickSignIn}>Sign In</SubmitBtn>
