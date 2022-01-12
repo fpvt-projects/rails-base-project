@@ -8,7 +8,6 @@ module Api
             def index
                 @users = User.all
                 render json: {data:@users, status: "Ok"}
-
             end
 
             def show

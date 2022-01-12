@@ -43,7 +43,7 @@ function Home({
       />
       <ContentContainer>
         <Routes>
-          <Route path="/trade" element={<Trade />} />
+          <Route path="/trade" element={<Trade user={user}/>} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route
             path="/user-list"

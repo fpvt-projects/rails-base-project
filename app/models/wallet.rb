@@ -11,4 +11,8 @@ class Wallet < ApplicationRecord
             wallet.balance += amount * transaction.currency_amount
             wallet.save!
     end
+
+    def self.check_actual_balance(userid)
+      User.find(userid).wallet.balance
+    end
 end

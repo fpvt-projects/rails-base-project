@@ -37,7 +37,8 @@ holders = User.create (
             lastname:'Talan',
             email:'francistalan@testmail.com',
             password:'12345',
-            password_confirmation:'12345'
+            password_confirmation:'12345',
+            admin: true
         }
     ]
 )

@@ -1,9 +1,19 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: %i[ show edit update destroy ]
+  # before_action :authenticate_user!
+
+  def transaction_action
+    walletz = Wallet.check_actual_balance(params[:id])
+    render json: {data:walletz, status: "Ok"}
+  end
 
   # GET /transactions or /transactions.json
   def index
     @transactions = Transaction.all
+    render json: {data:@transactions, status: "Ok"}
+  end
+
+  def buy
   end
 
   # GET /transactions/1 or /transactions/1.json

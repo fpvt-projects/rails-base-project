@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
   resources :crypto_currencies
-  resources :transactions
+  resources :transactions do
+    collection do
+      get "transaction_action/:id", to: "transactions#transaction_action"
+    end
+  end
   resources :wallets
   resources :portfolios
-  resources :crypto_stocks
+
+  
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root "home#index"
@@ -16,6 +21,7 @@ Rails.application.routes.draw do
   post '/login',    to: 'sessions#create'
   post '/logout',   to: 'sessions#destroy'
   get '/logged_in', to: 'sessions#is_logged_in?'
+  
 
   post 'user_token' => 'user_token#create'
 
