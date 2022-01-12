@@ -8,13 +8,10 @@ import Register from "./Register";
 import Home from "./Home";
 
 function App() {
-  // login and authentication
-  // const [isLoggedIn, setisLoggedIn] = useState(false);
   const [user, setUser] = useState("");
   const [userlist, setUserlist] = useState([]);
 
   // registration
-
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -22,14 +19,9 @@ function App() {
   const [password_confirmation, setPassword_confirmation] = useState("");
   const [admin, setAdmin] = useState(false);
 
-  // signin
-  const [userEmail, setUserEmail] = useState("");
+  const [buyCoinInformation, setBuyCoinInformation] = useState([]);
 
   const navigate = useNavigate();
-
-  const inputUserEmail = (e) => {
-    setUserEmail(e.target.value);
-  };
 
   const inputFirstname = (e) => {
     setFirstname(e.target.value);
@@ -48,9 +40,7 @@ function App() {
   };
 
   useEffect(() => {
-    // componentDidMount();
     loginRedirect();
-    // getAllUsers();
   }, []);
 
   const loginRedirect = () => {
@@ -58,18 +48,6 @@ function App() {
       ? console.log("")
       : navigate("/login");
   };
-
-  // const handleLogin = (data) => {
-  //   setisLoggedIn(true);
-  //   setUser(data.user);
-  //   console.log(data.user);
-
-  //   getAllUsers();
-  // };
-  // const handleLogout = () => {
-  //   setisLoggedIn(false);
-  //   setUser("");
-  // };
 
   const getAllUsers = () => {
     fetch("http://localhost:3001/api/v1/users", {
@@ -127,40 +105,6 @@ function App() {
       .catch((error) => console.log(error));
   };
 
-  // const loginStatus = () => {
-  //   axios
-  //     .get("http://localhost:3001/logged_in", { withCredentials: true })
-  //     .then((response) => {
-  //       if (response.data.logged_in) {
-  //         handleLogin(response);
-  //       } else {
-  //         handleLogout();
-  //       }
-  //     })
-  //     .catch((error) => console.log("api errors:", error));
-  // };
-
-  // const componentDidMount = () => {
-  //   loginStatus();
-  // };
-
-  // const handleLogin = () => {
-  //   fetch("http://localhost:3000/api/v1/users", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       api_v1_users: {
-  //         email: userEmail,
-  //         password: userPassword,
-  //       },
-  //     }),
-  //   })
-  //     .then((res) => console.log(res))
-  //     .catch((error) => console.log(error));
-  // };
-
   return (
     <Routes>
       <Route
@@ -180,9 +124,9 @@ function App() {
             lastname={lastname}
             password={password}
             password_confirmation={password_confirmation}
-            // handleLogout={handleLogout}
             getAllUsers={getAllUsers}
             user={user}
+            setBuyCoinInformation={setBuyCoinInformation}
           />
         }
       />
@@ -191,8 +135,8 @@ function App() {
         element={
           <Login
             getAllUsers={getAllUsers}
-            inputUserEmail={inputUserEmail}
-            userEmail={userEmail}
+            // inputUserEmail={inputUserEmail}
+            // userEmail={userEmail}
             // handleLogin={handleLogin}
           />
         }

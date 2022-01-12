@@ -20,9 +20,9 @@ function Home({
   lastname,
   password,
   password_confirmation,
-  // handleLogout,
   getAllUsers,
   user,
+  setBuyCoinInformation,
 }) {
   const navigate = useNavigate();
 
@@ -31,6 +31,7 @@ function Home({
 
   useEffect(() => {
     getAllUsers();
+    navigate("/trade");
   }, []);
 
   return (
@@ -38,12 +39,15 @@ function Home({
       <Sidebar
         handleClickTrade={handleClickTrade}
         handleClickPortfolio={handleClickPortfolio}
-        // handleLogout={handleLogout}
         user={user}
       />
       <ContentContainer>
         <Routes>
-          <Route path="/trade" element={<Trade user={user}/>} />
+
+          <Route
+            path="/trade/*"
+            element={<Trade setBuyCoinInformation={setBuyCoinInformation} />}
+          />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route
             path="/user-list"

@@ -29,7 +29,7 @@ function Sidebar({
       </UserInfo>
       <NavigationContainer>
         <NavButton onClick={handleClickTrade}>Trade</NavButton>
-        <NavButton onClick={handleClickPortfolio}>Portfolio</NavButton>
+        {/* <NavButton onClick={handleClickPortfolio}>Portfolio</NavButton> */}
         {user.admin ? (
           <UserlistButton onClick={handleClickUserlist}>
             View user list
