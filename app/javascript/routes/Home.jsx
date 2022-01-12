@@ -43,7 +43,6 @@ function Home({
       />
       <ContentContainer>
         <Routes>
-
           <Route
             path="/trade/*"
             element={<Trade setBuyCoinInformation={setBuyCoinInformation} />}

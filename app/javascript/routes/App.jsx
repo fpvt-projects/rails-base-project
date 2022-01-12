@@ -99,7 +99,7 @@ function App() {
       }),
     })
       .then((result) => {
-        console.log(result.status);
+        console.log(result);
         getAllUsers;
       })
       .catch((error) => console.log(error));
@@ -130,17 +130,7 @@ function App() {
           />
         }
       />
-      <Route
-        path="/login"
-        element={
-          <Login
-            getAllUsers={getAllUsers}
-            // inputUserEmail={inputUserEmail}
-            // userEmail={userEmail}
-            // handleLogin={handleLogin}
-          />
-        }
-      />
+      <Route path="/login" element={<Login getAllUsers={getAllUsers} />} />
       <Route
         path="/sign_up"
         element={

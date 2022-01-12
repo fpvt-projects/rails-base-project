@@ -1,32 +1,11 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Coins from "./Coinlist/Coins";
 import UserCoins from "./UserCoins/UserCoins";
+import jwt from "jwt-decode";
 
 function Trade({ setBuyCoinInformation }) {
-  const [bstoggle, setBstoggle] = useState(true);
-
-  const handleClickBuy = () => {
-    setBstoggle(true);
-  };
-  const handleClickSell = () => {
-    setBstoggle(false);
-  };
-
-  // useEffect(() => {
-  //   toggleBuyandSell;
-  // });
-
-  // const toggleBuyandSell = () => {
-  //   if ((bstoggle = true)) {
-  //     document.getElementsByClassName("marketcoins").style.display = "block";
-  //     document.getElementsByClassName("usercoins").style.display = "none";
-  //   } else {
-  //     document.getElementsByClassName("marketcoins").style.display = "none";
-  //     document.getElementsByClassName("usercoins").style.display = "block";
-  //   }
-  // };
-
   const [coinlist, setCoinlist] = useState([
     {
       currency_name: "bitcoin",
@@ -49,6 +28,34 @@ function Trade({ setBuyCoinInformation }) {
       buy_price: "1",
     },
   ]);
+
+  const [bstoggle, setBstoggle] = useState(true);
+  const [currentBalance, setCurrentBalance] = useState("");
+
+  const handleClickBuy = () => {
+    setBstoggle(true);
+  };
+  const handleClickSell = () => {
+    setBstoggle(false);
+  };
+
+  const getBalance = () => {
+    //decode jsonwebtoken to get current user id
+    var current_user = jwt(sessionStorage.getItem("token"));
+    const user_id = current_user.sub; //sub = current user id
+
+    axios
+      .get(`http://localhost:3001/transactions/transaction_action/${user_id}`)
+      .then((res) => {
+        setCurrentBalance(res.data.data); //response.data.data = balance
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    getBalance();
+  }, []);
+
   return (
     <Container>
       <MiscContainer>
@@ -59,6 +66,8 @@ function Trade({ setBuyCoinInformation }) {
           <p>Portfolio value:</p>
 
           <h1>$ 32,150.59</h1>
+
+          <p>Current balance: {currentBalance}</p>
         </TotalAssetContainer>
       </MiscContainer>
       <MarketContainer>
