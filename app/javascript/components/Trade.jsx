@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Coins from "./Coinlist/Coins";
 import UserCoins from "./UserCoins/UserCoins";
 import jwt from "jwt-decode";
+import CoinChart from "./CoinChart/CoinChart";
 
 function Trade({ setBuyCoinInformation }) {
   const [coinlist, setCoinlist] = useState([
@@ -45,7 +46,9 @@ function Trade({ setBuyCoinInformation }) {
     const user_id = current_user.sub; //sub = current user id
 
     axios
-      .get(`http://localhost:3001/transactions/transaction_action/${user_id}`)
+      .get(`http://localhost:3001/transactions/transaction_action/${user_id}`, {
+        headers: { Authorization: sessionStorage.getItem("token") }, //add header authorization if controller has before_action :authenticate_user
+      })
       .then((res) => {
         setCurrentBalance(res.data.data); //response.data.data = balance
       })
@@ -60,7 +63,7 @@ function Trade({ setBuyCoinInformation }) {
     <Container>
       <MiscContainer>
         <MiscContainerLeft>
-          <GraphGIF src="https://c.mql5.com/31/434/heikin-ashi-premium-screen-2254.gif" />
+          <CoinChart />
         </MiscContainerLeft>
         <TotalAssetContainer>
           <p>Portfolio value:</p>
