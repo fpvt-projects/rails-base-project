@@ -9,13 +9,14 @@ class TransactionsController < ApplicationController
     render json: {data:walletz, status: "Ok"}
   end
 
+  def transact_currency
+    
+  end
+
   # GET /transactions or /transactions.json
   def index
     @transactions = Transaction.all
     render json: {data:@transactions, status: "Ok"}
-  end
-
-  def buy
   end
 
   # GET /transactions/1 or /transactions/1.json
