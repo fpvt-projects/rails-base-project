@@ -15,24 +15,25 @@ function CreateUserForm({
   lastname,
   password,
   password_confirmation,
+  admin,
   getAllUsers,
   sidebar,
   openSideBar,
 }) {
-  const [userType, setUserType] = useState("");
+  // const [userType, setUserType] = useState("");
 
-  useEffect(() => {
-    if (userType == "user") {
-      setAdmin(false);
-    } else {
-      setAdmin(true);
-    }
-  }, [userType]);
+  // useEffect(() => {
+  //   if (userType == "user") {
+  //     setAdmin(false);
+  //   } else {
+  //     setAdmin(true);
+  //   }
+  // }, [userType]);
 
   const navigate = useNavigate();
 
   const selectUserType = (e) => {
-    setUserType(e.target.value);
+    setAdmin(e.target.value);
   };
 
   const emtpyForm = () => {
@@ -96,9 +97,9 @@ function CreateUserForm({
           placeholder="Password confirmation"
           value={password_confirmation}
         />
-        <DropdownSelect value={userType} onChange={selectUserType}>
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
+        <DropdownSelect value={admin} onChange={selectUserType}>
+          <option value={false}>User</option>
+          <option value={true}>Admin</option>
         </DropdownSelect>
         <SubmitBttn onClick={handleClickRegister}>Save</SubmitBttn>
         <ClearBttn onClick={ClearForm}>Clear</ClearBttn>

@@ -11,6 +11,8 @@ function App() {
   const [user, setUser] = useState("");
   const [userlist, setUserlist] = useState([]);
 
+  const [coinlist, setCointlist] = useState([]);
+
   // registration
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -40,6 +42,7 @@ function App() {
   };
 
   useEffect(() => {
+    getAllCoins();
     loginRedirect();
   }, []);
 
@@ -105,6 +108,27 @@ function App() {
       .catch((error) => console.log(error));
   };
 
+  const getAllCoins = () => {
+    axios
+      .get("http://localhost:3001/crypto_currencies")
+      .then((res) => {
+        let updatedCoinlist = [];
+        res.data.data.forEach((coin) =>
+          updatedCoinlist.push({
+            currency_name: coin.currency_name,
+            currency_symbol: coin.currency_sumbol,
+            contract_id: coin.contract_id,
+            total_supply: coin.total_supply,
+            market_cap: coin.market_cap,
+            currency_description: coin.currency_description,
+            currency_price: coin.currency_price,
+          })
+        );
+        setCointlist(updatedCoinlist);
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <Routes>
       <Route
@@ -124,9 +148,11 @@ function App() {
             lastname={lastname}
             password={password}
             password_confirmation={password_confirmation}
+            admin={admin}
             getAllUsers={getAllUsers}
             user={user}
             setBuyCoinInformation={setBuyCoinInformation}
+            coinlist={coinlist}
           />
         }
       />

@@ -11,8 +11,12 @@ function Sidebar({
   const navigate = useNavigate();
 
   const handleClickLogout = () => {
-    sessionStorage.clear();
-    navigate("/login");
+    const logout = window.confirm("Confirm Sign out");
+
+    if (logout == true) {
+      sessionStorage.clear();
+      navigate("/login");
+    }
   };
   const handleClickUserlist = () => {
     navigate("/user-list");
