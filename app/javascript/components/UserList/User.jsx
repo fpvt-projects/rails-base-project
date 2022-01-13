@@ -3,10 +3,22 @@ import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function User({ firstname, lastname, email, admin, id, getAllUsers }) {
+function User({
+  firstname,
+  lastname,
+  email,
+  admin,
+  id,
+  getAllUsers,
+  setEditId,
+  openEdit,
+}) {
   const navigate = useNavigate();
 
-  const handleEdit = () => alert("clicked Edit");
+  const handleEdit = () => {
+    setEditId(id);
+    openEdit();
+  };
 
   const handleDelete = () => {
     const confirmDelete = window.confirm(

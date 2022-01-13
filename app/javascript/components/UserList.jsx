@@ -4,6 +4,7 @@ import styled from "styled-components";
 import CreateUserForm from "./UserList/CreateUserForm";
 import SearchBar from "./UserList/SearchBar";
 import Users from "./UserList/Users";
+import EditForm from "./EditUser/EditForm";
 
 function UserList({
   userlist,
@@ -22,10 +23,9 @@ function UserList({
   getAllUsers,
   user,
 }) {
-  const navigate = useNavigate();
-
   const [sidebar, setSidebar] = useState(false);
 
+  const navigate = useNavigate();
   const openSideBar = () => setSidebar(!sidebar);
 
   useEffect(() => {
@@ -35,6 +35,7 @@ function UserList({
   return (
     <Container>
       <ContentContainer>
+        {/* {edit ? <EditForm openEdit={openEdit} /> : console.log("close edit")} */}
         <Users userlist={userlist} getAllUsers={getAllUsers} />
         <AddUserButton onClick={openSideBar}>+</AddUserButton>
       </ContentContainer>

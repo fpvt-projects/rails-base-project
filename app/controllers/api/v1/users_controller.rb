@@ -3,8 +3,8 @@ module Api
         class UsersController < ApplicationController
 
 
-            skip_before_action :verify_authenticity_token, only: [:create, :destroy]
-            before_action :authenticate_user, except: [:create]
+            skip_before_action :verify_authenticity_token, only: [:create, :destroy, :update]
+            before_action :authenticate_user, except: [:create, :update]
 
             
             def index
@@ -47,6 +47,8 @@ module Api
             end
 
             def update
+                @user = User.find(params[:id])
+
                 if @user.update(user_params)
                     render json: {success: 'User updated'}
                 else 
