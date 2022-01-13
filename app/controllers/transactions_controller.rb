@@ -1,7 +1,7 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: %i[ show edit update destroy ]
   skip_before_action :verify_authenticity_token
-  before_action :authenticate_user
+  # before_action :authenticate_user
   # before_action :authenticate_user!
 
   def transaction_action
@@ -77,6 +77,6 @@ class TransactionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transaction_params
-      params.require(:transaction).permit(:account_id, :transaction_id, :created_at)
+      params.require(:transaction).permit(:user_id, :currency_amount, :txn_type, :txn_price, :currency_symbol)
     end
 end

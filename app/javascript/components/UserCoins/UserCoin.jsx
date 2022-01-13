@@ -1,26 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import jwt from "jwt-decode";
+import axios from "axios";
 
 function UserCoin({
-  currency_name,
-  currency_id,
   currency_symbol,
-  contract_id,
-  total_supply,
-  market_cap,
-  currency_description,
-  buy_price,
+  currency_amount,
+  getBalance,
+  getOwnedCoins,
 }) {
+  const [amount, setAmount] = useState("");
+
+  const handleInput = (e) => setAmount(e.target.value);
+
+  const handleSell = () => {
+    var testid = jwt(sessionStorage.getItem("token"));
+    const userid = testid.sub;
+
+    axios
+      .post("http://localhost:3001/transactions", {
+        // headers: { Authorization: sessionStorage.getItem("token") },
+        transaction: {
+          user_id: userid,
+          currency_symbol: currency_symbol,
+          txn_type: "sell",
+          currency_amount: amount,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        getOwnedCoins();
+        getBalance();
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <Container>
-      <Column>{currency_name}</Column>
-      <Column>{currency_id}</Column>
       <Column>{currency_symbol}</Column>
-      <Column>{contract_id}</Column>
-      <Column>{total_supply}</Column>
-      <Column>{market_cap}</Column>
-      <Column>{currency_description}</Column>
-      <Column>{buy_price}</Column>
+      <Column>{currency_amount}</Column>
+      <Column>
+        <input type="text" onChange={handleInput} />
+      </Column>
+      <Column>
+        <button onClick={handleSell}>Sell</button>
+      </Column>
     </Container>
   );
 }
@@ -30,6 +54,7 @@ const Container = styled.div`
   width: 100%;
   height: 34px;
   display: flex;
+  justify-content: space-between;
   cursor: pointer;
   padding-left: 0.5rem;
   overflow: hidden;
@@ -42,7 +67,7 @@ const Container = styled.div`
 `;
 
 const Column = styled.div`
-  width: 12.5%;
+  width: 25%;
 `;
 
 export default UserCoin;

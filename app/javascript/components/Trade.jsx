@@ -5,7 +5,6 @@ import Coins from "./Coinlist/Coins";
 import UserCoins from "./UserCoins/UserCoins";
 import jwt from "jwt-decode";
 import CoinChart from "./CoinChart/CoinChart";
-import BuyCoin from "./BuyCoin/BuyCoin";
 
 function Trade({ setBuyCoinInformation, coinlist }) {
   const [bstoggle, setBstoggle] = useState(true);
@@ -61,20 +60,11 @@ function Trade({ setBuyCoinInformation, coinlist }) {
           <Coins
             coinlist={coinlist}
             setBuyCoinInformation={setBuyCoinInformation}
+            getBalance={getBalance}
           />
         ) : (
-          <UserCoins />
+          <UserCoins getBalance={getBalance} />
         )}
-
-        {/* <div className="marketcoins">
-          <Coins
-            coinlist={coinlist}
-            setBuyCoinInformation={setBuyCoinInformation}
-          />
-        </div>
-        <div className="usercoins">
-          <UserCoins />
-        </div> */}
       </MarketContainer>
     </Container>
   );
