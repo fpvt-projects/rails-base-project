@@ -6,9 +6,11 @@ Rails.application.routes.draw do
     end
   end
   resources :wallets
-  resources :portfolios
-
-  
+  resources :portfolios do
+    collection do
+      get "see_owned/:id", to: "portfolios#see_owned"
+    end
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root "home#index"

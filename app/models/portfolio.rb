@@ -16,4 +16,8 @@ class Portfolio < ApplicationRecord
             else Portfolio.create!({:user_id => transaction.user_id, :currency_symbol => transaction.currency_symbol, :currency_amount => transaction.currency_amount})   
         end
     end
+
+    def self.check_owned_currency(userid)
+        User.find(userid).portfolio.all
+    end
 end

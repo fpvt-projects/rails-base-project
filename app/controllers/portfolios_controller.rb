@@ -6,6 +6,11 @@ class PortfoliosController < ApplicationController
     @portfolios = Portfolio.all
   end
 
+  def see_owned
+    owned = Portfolio.check_owned_currency(params[:id])
+    render json: {data:owned, status: "Ok"}
+  end
+
   # GET /portfolios/1 or /portfolios/1.json
   def show
   end
