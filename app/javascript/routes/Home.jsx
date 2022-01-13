@@ -20,9 +20,11 @@ function Home({
   lastname,
   password,
   password_confirmation,
+  admin,
   getAllUsers,
   user,
   setBuyCoinInformation,
+  coinlist,
 }) {
   const navigate = useNavigate();
 
@@ -45,7 +47,12 @@ function Home({
         <Routes>
           <Route
             path="/trade/*"
-            element={<Trade setBuyCoinInformation={setBuyCoinInformation} />}
+            element={
+              <Trade
+                setBuyCoinInformation={setBuyCoinInformation}
+                coinlist={coinlist}
+              />
+            }
           />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route
@@ -63,6 +70,7 @@ function Home({
                 lastname={lastname}
                 password={password}
                 password_confirmation={password_confirmation}
+                admin={admin}
                 setAdmin={setAdmin}
                 handleRegister={handleRegister}
                 getAllUsers={getAllUsers}

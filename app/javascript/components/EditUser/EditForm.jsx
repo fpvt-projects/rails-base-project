@@ -13,6 +13,8 @@ function EditForm({ openEdit, userlist, editId, getAllUsers }) {
   const navigate = useNavigate();
 
   const handleinputfirstname = (e) => setfirstname(e.target.value);
+  const handleinputemail = (e) => setEmail(e.target.value);
+  const handleinputlastname = (e) => setlastname(e.target.value);
   const handleSave = () => {
     if (firstname == "" || lastname == "" || email == "") {
       setError("Field empty!");
@@ -61,11 +63,11 @@ function EditForm({ openEdit, userlist, editId, getAllUsers }) {
     <Container>
       <FormContainer>
         <label>Email:</label>
-        <Input type="text" value={email} onChange={handleinputfirstname} />
+        <Input type="text" value={email} onChange={handleinputemail} />
         <label>Firstname:</label>
         <Input type="text" value={firstname} onChange={handleinputfirstname} />
         <label>Lastname:</label>
-        <Input type="text" value={lastname} onChange={handleinputfirstname} />
+        <Input type="text" value={lastname} onChange={handleinputlastname} />
         <label>User-Type:</label>
         <DropdownSelect value={admin} onChange={setAdminType}>
           <option value={false}>User</option>

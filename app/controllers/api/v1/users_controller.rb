@@ -1,11 +1,8 @@
 module Api
     module V1
         class UsersController < ApplicationController
-
-
             skip_before_action :verify_authenticity_token, only: [:create, :destroy, :update]
             before_action :authenticate_user, except: [:create, :update]
-
             
             def index
                 @users = User.all

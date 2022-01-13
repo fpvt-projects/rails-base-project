@@ -5,31 +5,9 @@ import Coins from "./Coinlist/Coins";
 import UserCoins from "./UserCoins/UserCoins";
 import jwt from "jwt-decode";
 import CoinChart from "./CoinChart/CoinChart";
+import BuyCoin from "./BuyCoin/BuyCoin";
 
-function Trade({ setBuyCoinInformation }) {
-  const [coinlist, setCoinlist] = useState([
-    {
-      currency_name: "bitcoin",
-      currency_id: "btc",
-      currency_symbol: "btc",
-      contract_id: "1",
-      total_supply: "10",
-      market_cap: "5",
-      currency_description: "This is bitcoin",
-      buy_price: "3",
-    },
-    {
-      currency_name: "ethereum",
-      currency_id: "eth",
-      currency_symbol: "eth",
-      contract_id: "2",
-      total_supply: "5",
-      market_cap: "2",
-      currency_description: "This is ethereum",
-      buy_price: "1",
-    },
-  ]);
-
+function Trade({ setBuyCoinInformation, coinlist }) {
   const [bstoggle, setBstoggle] = useState(true);
   const [currentBalance, setCurrentBalance] = useState("");
 

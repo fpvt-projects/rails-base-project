@@ -41,6 +41,7 @@ function Coin({
   };
   return (
     <Container onClick={toggleBuyForm}>
+      {showBuyForm ? <BuyCoin /> : console.log("")}
       <Column>{currency_name}</Column>
       <Column>{currency_id}</Column>
       <Column>{currency_symbol}</Column>
