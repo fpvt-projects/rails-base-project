@@ -1,19 +1,43 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import BuyCoin from "../BuyCoin/BuyCoin";
+import jwt from "jwt-decode";
 
 function Coin({
   currency_name,
-  currency_id,
   currency_symbol,
   contract_id,
   total_supply,
   market_cap,
-  currency_description,
-  buy_price,
+  currency_price,
   setBuyCoinIformation,
+  getBalance,
 }) {
   const [showBuyForm, setShowBuyForm] = useState(false);
+  const [amount, setAmount] = useState("");
+
+  const handleInput = (e) => setAmount(e.target.value);
+
+  const handleBuy = () => {
+    var testid = jwt(sessionStorage.getItem("token"));
+    const userid = testid.sub;
+
+    axios
+      .post("http://localhost:3001/transactions", {
+        // headers: { Authorization: sessionStorage.getItem("token") },
+        transaction: {
+          user_id: userid,
+          currency_symbol: currency_symbol,
+          txn_type: "buy",
+          currency_amount: amount,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        getBalance();
+      })
+      .catch((error) => console.log(error));
+  };
 
   const toggleBuyForm = () => {
     setShowBuyForm(!showBuyForm);
@@ -21,35 +45,20 @@ function Coin({
 
   useEffect(() => {}, []);
 
-  const setThisCoin = () => {
-    if (showBuyForm == true) {
-      setBuyCoinIformation([
-        {
-          currency_name: currency_name,
-          currency_id: currency_id,
-          currency_symbol: currency_symbol,
-          contract_id: contract_id,
-          total_supply: total_supply,
-          market_cap: market_cap,
-          currency_description: currency_description,
-          buy_price: buy_price,
-        },
-      ]);
-    } else {
-      setBuyCoinIformation([]);
-    }
-  };
   return (
     <Container onClick={toggleBuyForm}>
-      {showBuyForm ? <BuyCoin /> : console.log("")}
       <Column>{currency_name}</Column>
-      <Column>{currency_id}</Column>
       <Column>{currency_symbol}</Column>
       <Column>{contract_id}</Column>
       <Column>{total_supply}</Column>
       <Column>{market_cap}</Column>
-      <Column>{currency_description}</Column>
-      <Column>{buy_price}</Column>
+      <Column>{currency_price}</Column>
+      <Column>
+        <input type="text" onChange={handleInput} />
+      </Column>
+      <Column>
+        <button onClick={handleBuy}>Buy</button>
+      </Column>
     </Container>
   );
 }
@@ -62,7 +71,7 @@ const Container = styled.div`
   cursor: pointer;
   padding-left: 0.5rem;
   overflow: hidden;
-  position: relative;
+
   background-color: #efefef;
 
   :hover {
@@ -71,7 +80,9 @@ const Container = styled.div`
 `;
 
 const Column = styled.div`
+  padding: 0 1rem;
   width: 12.5%;
+  overflow: hidden;
 `;
 
 export default Coin;

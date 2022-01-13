@@ -116,7 +116,7 @@ function App() {
         res.data.data.forEach((coin) =>
           updatedCoinlist.push({
             currency_name: coin.currency_name,
-            currency_symbol: coin.currency_sumbol,
+            currency_symbol: coin.currency_symbol,
             contract_id: coin.contract_id,
             total_supply: coin.total_supply,
             market_cap: coin.market_cap,

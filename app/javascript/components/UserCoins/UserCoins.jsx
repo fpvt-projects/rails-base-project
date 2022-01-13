@@ -1,35 +1,48 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import UserCoin from "./UserCoin";
+import jwt from "jwt-decode";
 
-function UserCoins() {
-  const [userCoins, setUserCoins] = useState([
-    {
-      currency_name: "dogecoin",
-      currency_id: "DOGE",
-      currency_symbol: "DOGE",
-      contract_id: "3",
-      total_supply: "56",
-      market_cap: "25",
-      currency_description: "This is dogecoin",
-      buy_price: "4",
-    },
-  ]);
+function UserCoins({ getBalance }) {
+  const [userCoins, setUserCoins] = useState([]);
+
+  const getOwnedCoins = () => {
+    var testid = jwt(sessionStorage.getItem("token"));
+    const userid = testid.sub;
+
+    axios
+      .get(`http://localhost:3001/portfolios/see_owned/${userid}`)
+      .then((res) => {
+        console.log(res.data.data);
+        let updatedownedcoins = [];
+
+        res.data.data.forEach((coin) => {
+          updatedownedcoins.push({
+            id: coin.id,
+            currency_symbol: coin.currency_symbol,
+            currency_amount: coin.currency_amount,
+          });
+        });
+        setUserCoins(updatedownedcoins);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    getOwnedCoins();
+  }, []);
 
   return (
     <div>
       <Coinlist>
         {userCoins.map((coin) => (
           <UserCoin
-            key={coin.contract_id}
-            currency_id={coin.currency_id}
-            currency_name={coin.currency_name}
+            key={coin.id}
             currency_symbol={coin.currency_symbol}
-            contract_id={coin.contract_id}
-            total_supply={coin.total_supply}
-            market_cap={coin.market_cap}
-            currency_description={coin.currency_description}
-            buy_price={coin.buy_price}
+            currency_amount={coin.currency_amount}
+            getBalance={getBalance}
+            getOwnedCoins={getOwnedCoins}
           />
         ))}
       </Coinlist>
