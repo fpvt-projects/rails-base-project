@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   resources :crypto_currencies
   resources :transactions do
     collection do
@@ -11,8 +12,8 @@ Rails.application.routes.draw do
       get "see_owned/:id", to: "portfolios#see_owned"
     end
   end
-
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
+ 
   root "home#index"
   get "Home", to: "home#index"
 
@@ -20,17 +21,17 @@ Rails.application.routes.draw do
     !request.xhr? && request.format.html?
   end
 
-  # post '/login',    to: 'sessions#create'
-  # post '/logout',   to: 'sessions#destroy'
-  # get '/logged_in', to: 'sessions#is_logged_in?'
-  
-
   post 'user_token' => 'user_token#create'
 
   namespace 'api' do
     namespace 'v1' do 
       resources :users, only: [:create, :show, :edit, :update, :index, :destroy]
+      get '/todayQuotes', to: 'quote#index'
 
     end
   end
+
+  
+
+
 end

@@ -3,8 +3,8 @@ import { useNavigate, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import Sidebar from "../components/Sidebar";
 import Trade from "../components/Trade";
-import Portfolio from "../components/Portfolio";
 import UserList from "../components/UserList";
+import TransactionHistory from "../components/TransactionHistory";
 
 function Home({
   userlist,
@@ -29,7 +29,7 @@ function Home({
   const navigate = useNavigate();
 
   const handleClickTrade = () => navigate("/trade");
-  const handleClickPortfolio = () => navigate("/portfolio");
+  const handleClickHistory = () => navigate("/history");
 
   useEffect(() => {
     getAllUsers();
@@ -40,16 +40,22 @@ function Home({
     <Container>
       <Sidebar
         handleClickTrade={handleClickTrade}
-        handleClickPortfolio={handleClickPortfolio}
+        handleClickHistory={handleClickHistory}
         user={user}
       />
       <ContentContainer>
         <Routes>
           <Route
             path="/trade/*"
-            element={<Trade getAllCoins={getAllCoins} coinlist={coinlist} />}
+            element={
+              <Trade
+                getAllCoins={getAllCoins}
+                coinlist={coinlist}
+                user={user}
+              />
+            }
           />
-          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/history" element={<TransactionHistory />} />
           <Route
             path="/user-list"
             element={

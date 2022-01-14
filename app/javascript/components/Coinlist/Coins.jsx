@@ -2,7 +2,13 @@ import React from "react";
 import Coin from "./Coin";
 import styled from "styled-components";
 
-function Coins({ coinlist, setBuyCoinInformation, getBalance, getAllCoins }) {
+function Coins({
+  coinlist,
+  setBuyCoinInformation,
+  getBalance,
+  getAllCoins,
+  user,
+}) {
   return (
     <div>
       <Header>
@@ -28,6 +34,7 @@ function Coins({ coinlist, setBuyCoinInformation, getBalance, getAllCoins }) {
             setBuyCoinInformation={setBuyCoinInformation}
             getBalance={getBalance}
             getAllCoins={getAllCoins}
+            user={user}
           />
         ))}
       </Coinlist>

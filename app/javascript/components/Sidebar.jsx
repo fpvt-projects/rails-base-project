@@ -2,12 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-function Sidebar({
-  handleClickTrade,
-  handleClickPortfolio,
-  user,
-  handleLogout,
-}) {
+function Sidebar({ handleClickTrade, handleClickHistory, user }) {
   const navigate = useNavigate();
 
   const handleClickLogout = () => {
@@ -33,6 +28,7 @@ function Sidebar({
       </UserInfo>
       <NavigationContainer>
         <NavButton onClick={handleClickTrade}>Trade</NavButton>
+        <NavButton onClick={handleClickHistory}>Trade History</NavButton>
         {/* <NavButton onClick={handleClickPortfolio}>Portfolio</NavButton> */}
         {user.admin ? (
           <UserlistButton onClick={handleClickUserlist}>

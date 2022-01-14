@@ -6,9 +6,10 @@ import UserCoins from "./UserCoins/UserCoins";
 import jwt from "jwt-decode";
 import CoinChart from "./CoinChart/CoinChart";
 
-function Trade({ coinlist, getAllCoins }) {
+function Trade({ coinlist, getAllCoins, user }) {
   const [bstoggle, setBstoggle] = useState(true);
   const [currentBalance, setCurrentBalance] = useState("");
+  const [quote, setQuote] = useState("");
 
   const handleClickBuy = () => {
     setBstoggle(true);
@@ -32,8 +33,18 @@ function Trade({ coinlist, getAllCoins }) {
       .catch((error) => console.log(error));
   };
 
+  const getQuoteOfTheDay = () => {
+    axios
+      .get("http://localhost:3001/api/v1/todayQuotes", {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((result) => console.log(result))
+      .catch((error) => console.log(error));
+  };
+
   useEffect(() => {
     getBalance();
+    getQuoteOfTheDay();
   }, []);
 
   return (
@@ -61,9 +72,10 @@ function Trade({ coinlist, getAllCoins }) {
             coinlist={coinlist}
             getBalance={getBalance}
             getAllCoins={getAllCoins}
+            user={user}
           />
         ) : (
-          <UserCoins getBalance={getBalance} />
+          <UserCoins getBalance={getBalance} user={user} />
         )}
       </MarketContainer>
     </Container>

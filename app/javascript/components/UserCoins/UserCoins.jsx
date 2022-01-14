@@ -4,12 +4,12 @@ import styled from "styled-components";
 import UserCoin from "./UserCoin";
 import jwt from "jwt-decode";
 
-function UserCoins({ getBalance }) {
+function UserCoins({ getBalance, user }) {
   const [userCoins, setUserCoins] = useState([]);
 
   const getOwnedCoins = () => {
-    var testid = jwt(sessionStorage.getItem("token"));
-    const userid = testid.sub;
+    // var testid = jwt(sessionStorage.getItem("token"));
+    const userid = user.id;
 
     axios
       .get(`http://localhost:3001/portfolios/see_owned/${userid}`)

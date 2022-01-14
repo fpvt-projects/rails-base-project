@@ -1,4 +1,4 @@
-module QuoreRandomizer
+module ZenQuotes
     class Errors
         def self.map(code)
             case code

@@ -12,21 +12,19 @@ function Coin({
   currency_price,
   getAllCoins,
   getBalance,
+  user,
 }) {
   const [showBuyForm, setShowBuyForm] = useState(false);
   const [amount, setAmount] = useState("");
 
   const handleInput = (e) => {
-    const re = /^[0-9\b]+$/;
-
-    if (e.target.value === "" || re.test(e.target.value)) {
-      setAmount(e.target.value);
-    }
+    setAmount(e.target.value);
   };
 
   const handleBuy = () => {
-    var testid = jwt(sessionStorage.getItem("token"));
-    const userid = testid.sub;
+    // var testid = jwt(sessionStorage.getItem("token"));
+    // const userid = testid.sub;
+    const userid = user.id;
 
     let confirm = window.confirm("Confirm Trade?");
 
@@ -67,7 +65,7 @@ function Coin({
       <Column>{market_cap}</Column>
       <Column>{currency_price}</Column>
       <Column>
-        <Input type="text" pattern="\d*" onChange={handleInput} />
+        <Input type="text" onChange={handleInput} />
       </Column>
       <Column>
         <Button amount={amount} onClick={handleBuy}>

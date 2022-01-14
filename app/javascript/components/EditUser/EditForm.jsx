@@ -63,7 +63,7 @@ function EditForm({ openEdit, userlist, editId, getAllUsers }) {
     <Container>
       <FormContainer>
         <label>Email:</label>
-        <Input type="text" value={email} onChange={handleinputemail} />
+        <label style={{ marginBottom: "5px" }}>{email}</label>
         <label>Firstname:</label>
         <Input type="text" value={firstname} onChange={handleinputfirstname} />
         <label>Lastname:</label>
@@ -95,6 +95,7 @@ const Container = styled.div`
   background: rgba(0, 0, 0, 0.5);
 `;
 const FormContainer = styled.div`
+  padding: 0 10px;
   height: 450px;
   width: 400px;
   background-color: white;
@@ -102,7 +103,6 @@ const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   position: relative;
 `;
 const Input = styled.input`
@@ -115,6 +115,7 @@ const Input = styled.input`
 const DropdownSelect = styled.select`
   height: 34px;
   margin-bottom: 10px;
+  padding-left: 5px;
 `;
 
 const ButtonContainer = styled.div`

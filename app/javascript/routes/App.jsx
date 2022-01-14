@@ -39,11 +39,6 @@ function App() {
     setPassword_confirmation(e.target.value);
   };
 
-  useEffect(() => {
-    getAllCoins();
-    loginRedirect();
-  }, []);
-
   const loginRedirect = () => {
     sessionStorage.getItem("token") != null
       ? console.log("")
@@ -127,6 +122,11 @@ function App() {
       })
       .catch((error) => console.log(error));
   };
+
+  useEffect(() => {
+    getAllCoins();
+    loginRedirect();
+  }, []);
 
   return (
     <Routes>
