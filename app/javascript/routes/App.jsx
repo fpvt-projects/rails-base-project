@@ -21,8 +21,6 @@ function App() {
   const [password_confirmation, setPassword_confirmation] = useState("");
   const [admin, setAdmin] = useState(false);
 
-  const [buyCoinInformation, setBuyCoinInformation] = useState([]);
-
   const navigate = useNavigate();
 
   const inputFirstname = (e) => {
@@ -115,6 +113,7 @@ function App() {
         let updatedCoinlist = [];
         res.data.data.forEach((coin) =>
           updatedCoinlist.push({
+            id: coin.id,
             currency_name: coin.currency_name,
             currency_symbol: coin.currency_symbol,
             contract_id: coin.contract_id,
@@ -151,7 +150,7 @@ function App() {
             admin={admin}
             getAllUsers={getAllUsers}
             user={user}
-            setBuyCoinInformation={setBuyCoinInformation}
+            getAllCoins={getAllCoins}
             coinlist={coinlist}
           />
         }

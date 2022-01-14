@@ -6,7 +6,7 @@ import UserCoins from "./UserCoins/UserCoins";
 import jwt from "jwt-decode";
 import CoinChart from "./CoinChart/CoinChart";
 
-function Trade({ setBuyCoinInformation, coinlist }) {
+function Trade({ coinlist, getAllCoins }) {
   const [bstoggle, setBstoggle] = useState(true);
   const [currentBalance, setCurrentBalance] = useState("");
 
@@ -59,8 +59,8 @@ function Trade({ setBuyCoinInformation, coinlist }) {
         {bstoggle ? (
           <Coins
             coinlist={coinlist}
-            setBuyCoinInformation={setBuyCoinInformation}
             getBalance={getBalance}
+            getAllCoins={getAllCoins}
           />
         ) : (
           <UserCoins getBalance={getBalance} />
@@ -103,11 +103,6 @@ const MarketContainer = styled.div`
   width: 100%;
   height: 50%;
   border-top: 2px solid #e0e0e0;
-`;
-
-const GraphGIF = styled.img`
-  height: 100%;
-  width: 100%;
 `;
 
 const Navbar = styled.nav`

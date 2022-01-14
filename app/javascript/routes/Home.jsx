@@ -23,8 +23,8 @@ function Home({
   admin,
   getAllUsers,
   user,
-  setBuyCoinInformation,
   coinlist,
+  getAllCoins,
 }) {
   const navigate = useNavigate();
 
@@ -47,12 +47,7 @@ function Home({
         <Routes>
           <Route
             path="/trade/*"
-            element={
-              <Trade
-                setBuyCoinInformation={setBuyCoinInformation}
-                coinlist={coinlist}
-              />
-            }
+            element={<Trade getAllCoins={getAllCoins} coinlist={coinlist} />}
           />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route
