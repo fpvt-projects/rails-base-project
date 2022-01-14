@@ -35,6 +35,12 @@ function UserCoins({ getBalance }) {
 
   return (
     <div>
+      <Header>
+        <Column>Name</Column>
+        <Column>Amount Owned</Column>
+        <Column>Amount</Column>
+        <Column>Action</Column>
+      </Header>
       <Coinlist>
         {userCoins.map((coin) => (
           <UserCoin
@@ -55,6 +61,19 @@ const Coinlist = styled.div`
   max-height: 70%;
   overflow-x: hidden;
   overflow-y: auto;
+`;
+
+const Header = styled.div`
+  width: 100%;
+  display: flex;
+  text-align: center;
+  font-weight: bold;
+  background-color: #efefef;
+  padding: 10px 0;
+`;
+
+const Column = styled.div`
+  width: 25%;
 `;
 
 export default UserCoins;

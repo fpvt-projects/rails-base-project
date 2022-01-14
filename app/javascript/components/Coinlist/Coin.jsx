@@ -28,22 +28,26 @@ function Coin({
     var testid = jwt(sessionStorage.getItem("token"));
     const userid = testid.sub;
 
-    axios
-      .post("http://localhost:3001/transactions", {
-        // headers: { Authorization: sessionStorage.getItem("token") },
-        transaction: {
-          user_id: userid,
-          currency_symbol: currency_symbol,
-          txn_type: "buy",
-          currency_amount: amount,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        getAllCoins();
-        getBalance();
-      })
-      .catch((error) => console.log(error));
+    let confirm = window.confirm("Confirm Trade?");
+
+    if (confirm == true) {
+      axios
+        .post("http://localhost:3001/transactions", {
+          // headers: { Authorization: sessionStorage.getItem("token") },
+          transaction: {
+            user_id: userid,
+            currency_symbol: currency_symbol,
+            txn_type: "buy",
+            currency_amount: amount,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          getAllCoins();
+          getBalance();
+        })
+        .catch((error) => console.log(error));
+    }
   };
 
   const toggleBuyForm = () => {
@@ -120,10 +124,11 @@ const Button = styled.button`
   border-radius: 5px;
   text-transform: uppercase;
   font-weight: bold;
+  background-color: red;
+  color: white;
 
   :hover {
-    background-color: gray;
-    color: white;
+    background-color: #9b0606;
   }
 `;
 
