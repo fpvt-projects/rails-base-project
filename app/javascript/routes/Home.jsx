@@ -55,7 +55,7 @@ function Home({
               />
             }
           />
-          <Route path="/history" element={<TransactionHistory />} />
+          <Route path="/history" element={<TransactionHistory user={user} />} />
           <Route
             path="/user-list"
             element={

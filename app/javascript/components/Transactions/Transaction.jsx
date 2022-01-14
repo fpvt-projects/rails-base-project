@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 function Transaction({
   created_at,
-  updated_at,
   txn_type,
   currency_symbol,
   currency_amount,
@@ -12,7 +11,6 @@ function Transaction({
   return (
     <Container>
       <Column>{created_at}</Column>
-      <Column>{updated_at}</Column>
       <Column>{txn_type}</Column>
       <Column>{currency_symbol}</Column>
       <Column>{currency_amount}</Column>
@@ -24,10 +22,15 @@ function Transaction({
 const Container = styled.div`
   height: 34px;
   width: 100%;
+  display: flex;
+
+  :hover {
+    background-color: #e0e0e0;
+  }
 `;
 
 const Column = styled.div`
-  width: 16.66%;
+  width: 20%;
 `;
 
 export default Transaction;

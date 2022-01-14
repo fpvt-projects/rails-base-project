@@ -116,6 +116,8 @@ const TotalAssetContainer = styled.div`
   justify-content: center;
   border-left: 2px solid #e0e0e0;
   position: relative;
+  padding-left: 1rem;
+  padding-right: 1rem;
 `;
 
 const MarketContainer = styled.div`
@@ -144,7 +146,7 @@ const NavButtons = styled.button`
 
 const DailyQuotes = styled.p`
   position: absolute;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: bold;
   bottom: 10px;
 `;
