@@ -13,6 +13,7 @@ function Coin({
   getAllCoins,
   getBalance,
   user,
+  BASE_URL,
 }) {
   const [amount, setAmount] = useState("");
 
@@ -29,7 +30,7 @@ function Coin({
 
     if (confirm == true) {
       axios
-        .post("http://localhost:3001/transactions", {
+        .post(`${BASE_URL}/transactions`, {
           // headers: { Authorization: sessionStorage.getItem("token") },
           transaction: {
             user_id: userid,

@@ -6,7 +6,7 @@ import UserCoins from "./UserCoins/UserCoins";
 import jwt from "jwt-decode";
 import CoinChart from "./CoinChart/CoinChart";
 
-function Trade({ coinlist, getAllCoins, user }) {
+function Trade({ coinlist, getAllCoins, user, BASE_URL }) {
   const [bstoggle, setBstoggle] = useState(true);
   const [currentBalance, setCurrentBalance] = useState("");
   const [quote, setQuote] = useState("");
@@ -24,7 +24,7 @@ function Trade({ coinlist, getAllCoins, user }) {
     const user_id = current_user.sub; //sub = current user id
 
     axios
-      .get(`http://localhost:3001/transactions/transaction_action/${user_id}`, {
+      .get(`${BASE_URL}/transactions/transaction_action/${user_id}`, {
         headers: { Authorization: sessionStorage.getItem("token") }, //add header authorization if controller has before_action :authenticate_user
       })
       .then((res) => {
@@ -35,7 +35,7 @@ function Trade({ coinlist, getAllCoins, user }) {
 
   const getQuoteOfTheDay = () => {
     axios
-      .get("http://localhost:3001/api/v1/todayQuotes", {
+      .get(`${BASE_URL}/api/v1/todayQuotes`, {
         headers: { accept: "application/json" },
       })
       .then((result) =>
@@ -79,9 +79,10 @@ function Trade({ coinlist, getAllCoins, user }) {
             getBalance={getBalance}
             getAllCoins={getAllCoins}
             user={user}
+            BASE_URL={BASE_URL}
           />
         ) : (
-          <UserCoins getBalance={getBalance} user={user} />
+          <UserCoins getBalance={getBalance} user={user} BASE_URL={BASE_URL} />
         )}
       </MarketContainer>
     </Container>

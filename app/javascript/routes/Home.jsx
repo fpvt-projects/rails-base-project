@@ -25,6 +25,7 @@ function Home({
   user,
   coinlist,
   getAllCoins,
+  BASE_URL,
 }) {
   const navigate = useNavigate();
 
@@ -52,10 +53,14 @@ function Home({
                 getAllCoins={getAllCoins}
                 coinlist={coinlist}
                 user={user}
+                BASE_URL={BASE_URL}
               />
             }
           />
-          <Route path="/history" element={<TransactionHistory user={user} />} />
+          <Route
+            path="/history"
+            element={<TransactionHistory user={user} BASE_URL={BASE_URL} />}
+          />
           <Route
             path="/user-list"
             element={
@@ -76,6 +81,7 @@ function Home({
                 handleRegister={handleRegister}
                 getAllUsers={getAllUsers}
                 user={user}
+                BASE_URL={BASE_URL}
               />
             }
           />

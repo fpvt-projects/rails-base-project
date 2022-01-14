@@ -23,6 +23,7 @@ function UserList({
   setAdmin,
   getAllUsers,
   user,
+  BASE_URL,
 }) {
   const [sidebar, setSidebar] = useState(false);
 
@@ -37,7 +38,11 @@ function UserList({
     <Container>
       <ContentContainer>
         {/* {edit ? <EditForm openEdit={openEdit} /> : console.log("close edit")} */}
-        <Users userlist={userlist} getAllUsers={getAllUsers} />
+        <Users
+          userlist={userlist}
+          getAllUsers={getAllUsers}
+          BASE_URL={BASE_URL}
+        />
         <AddUserButton onClick={openSideBar}>+</AddUserButton>
       </ContentContainer>
 
