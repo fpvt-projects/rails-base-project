@@ -7,9 +7,9 @@ class User < ApplicationRecord
     require 'securerandom'
 
     has_secure_password 
-    has_one :wallet
-    has_many :portfolio
-    has_many :transactions
+    has_one :wallet, dependent: :destroy
+    has_many :portfolio, dependent: :destroy
+    has_many :transactions, dependent: :destroy
     after_create :create_wallet
     # after_create :create_portfolio
     
