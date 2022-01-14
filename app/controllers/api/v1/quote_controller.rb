@@ -3,7 +3,7 @@ module Api
         class QuoteController < ApplicationController
 
             def index
-                @randomQuote = ZenQuotes::Client.today
+                @randomQuote = ZenQuotes::Client.random
 
                 render json: {quote: @randomQuote}
             end
