@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     namespace 'v1' do 
       resources :users, only: [:create, :show, :edit, :update, :index, :destroy]
       get '/todayQuotes', to: 'quote#index'
-
+      get '/philippinesTime', to: 'quote#pTime'
     end
   end
 

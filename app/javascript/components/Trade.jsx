@@ -10,6 +10,7 @@ function Trade({ coinlist, getAllCoins, user }) {
   const [bstoggle, setBstoggle] = useState(true);
   const [currentBalance, setCurrentBalance] = useState("");
   const [quote, setQuote] = useState("");
+  const [time, setTime] = useState("");
 
   const handleClickBuy = () => {
     setBstoggle(true);
@@ -46,9 +47,21 @@ function Trade({ coinlist, getAllCoins, user }) {
       .catch((error) => console.log(error));
   };
 
+  const getTime = () => {
+    axios
+      .get("http://localhost:3001/api/v1/philippinesTime", {
+        headers: { accept: "application/json" },
+      })
+      .then((answer) =>
+      // setTime(`${answer.data.data}`)
+      console.log(answer.data)
+      )
+  }
+
   useEffect(() => {
     getBalance();
     getQuoteOfTheDay();
+    getTime();
   }, []);
 
   return (
@@ -65,6 +78,7 @@ function Trade({ coinlist, getAllCoins, user }) {
           <p>Current balance: {currentBalance}</p>
 
           <DailyQuotes>{quote}</DailyQuotes>
+          {time}
         </TotalAssetContainer>
       </MiscContainer>
       <MarketContainer>

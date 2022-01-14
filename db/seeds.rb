@@ -26,7 +26,47 @@ coin = CryptoCurrency.create(
             market_cap: '10000',
             currency_description: 'Coin for Apes',
             currency_price: '0.00002857142'
-        }
+        },
+
+        {
+            currency_name: 'Crypto-Ships',
+            currency_symbol: 'CSHIPS',
+            total_supply: '100000000',
+            market_cap: '10000',
+            currency_description: 'Coin For Dodge',
+            currency_price: '0.0005'
+        },
+
+        {
+            currency_name: 'Infinity-Sky',
+            currency_symbol: 'ISKY',
+            total_supply: '1000000',
+            market_cap: '5000',
+            currency_description: 'Coin For Dodge',
+            currency_price: '0.22'
+        },
+
+        {
+            currency_name: 'Bomb-Crypto',
+            currency_symbol: 'BCOIN',
+            total_supply: '100000000',
+            market_cap: '100000',
+            currency_description: 'Coin For Dodge',
+            currency_price: '0.001'
+        },
+
+
+        {
+            currency_name: 'Polygon',
+            currency_symbol: 'Matic',
+            total_supply: '10000000000',
+            market_cap: '15000000000',
+            currency_description: 'Coin For Dodge',
+            currency_price: '1.5'
+        },
+
+
+        
     ]
 )
 
