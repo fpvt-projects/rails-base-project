@@ -3,11 +3,11 @@ import axios from "axios";
 import Transactions from "./Transactions/Transactions";
 import styled from "styled-components";
 
-function TransactionHistory({ user }) {
+function TransactionHistory({ user, BASE_URL }) {
   const [transactions, setTransactions] = useState([]);
   const getTradeHistory = () => {
     axios
-      .get(`http://localhost:3001/transactions`)
+      .get(`${BASE_URL}/transactions`)
       .then((res) => {
         let updatedTransactionlist = [];
         res.data.data.forEach((transaction) => {

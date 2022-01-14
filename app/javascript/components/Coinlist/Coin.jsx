@@ -13,8 +13,8 @@ function Coin({
   getAllCoins,
   getBalance,
   user,
+  BASE_URL,
 }) {
-  const [showBuyForm, setShowBuyForm] = useState(false);
   const [amount, setAmount] = useState("");
 
   const handleInput = (e) => {
@@ -30,7 +30,7 @@ function Coin({
 
     if (confirm == true) {
       axios
-        .post("http://localhost:3001/transactions", {
+        .post(`${BASE_URL}/transactions`, {
           // headers: { Authorization: sessionStorage.getItem("token") },
           transaction: {
             user_id: userid,
@@ -43,19 +43,16 @@ function Coin({
           console.log(res);
           getAllCoins();
           getBalance();
+          setAmount("");
         })
         .catch((error) => console.log(error));
     }
   };
 
-  const toggleBuyForm = () => {
-    setShowBuyForm(!showBuyForm);
-  };
-
   useEffect(() => {}, []);
 
   return (
-    <Container onClick={toggleBuyForm}>
+    <Container>
       <ColumnCurrencyName>
         {currency_name}
         <ContractID>{contract_id}</ContractID>
@@ -65,7 +62,7 @@ function Coin({
       <Column>{market_cap}</Column>
       <Column>{currency_price}</Column>
       <Column>
-        <Input type="text" onChange={handleInput} />
+        <Input type="text" value={amount} onChange={handleInput} />
       </Column>
       <Column>
         <Button amount={amount} onClick={handleBuy}>

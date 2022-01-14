@@ -3,7 +3,7 @@ import User from "./User";
 import styled from "styled-components";
 import EditForm from "../EditUser/EditForm";
 
-function Users({ userlist, getAllUsers }) {
+function Users({ userlist, getAllUsers, BASE_URL }) {
   const [edit, setEdit] = useState(false);
   const [editId, setEditId] = useState("");
   const openEdit = () => setEdit(!edit);
@@ -16,6 +16,7 @@ function Users({ userlist, getAllUsers }) {
           userlist={userlist}
           editId={editId}
           getAllUsers={getAllUsers}
+          BASE_URL={BASE_URL}
         />
       ) : (
         console.log("close edit")
@@ -50,6 +51,7 @@ function Users({ userlist, getAllUsers }) {
             getAllUsers={getAllUsers}
             setEditId={setEditId}
             openEdit={openEdit}
+            BASE_URL={BASE_URL}
           />
         ))}
       </Userlist>

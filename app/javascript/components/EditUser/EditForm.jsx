@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-function EditForm({ openEdit, userlist, editId, getAllUsers }) {
+function EditForm({ openEdit, userlist, editId, getAllUsers, BASE_URL }) {
   const [email, setEmail] = useState("");
   const [firstname, setfirstname] = useState("");
   const [lastname, setlastname] = useState("");
@@ -20,7 +20,7 @@ function EditForm({ openEdit, userlist, editId, getAllUsers }) {
       setError("Field empty!");
     } else {
       axios
-        .patch(`http://localhost:3001/api/v1/users/${editId}`, {
+        .patch(`${BASE_URL}/api/v1/users/${editId}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: sessionStorage.getItem("token"),

@@ -12,6 +12,7 @@ function User({
   getAllUsers,
   setEditId,
   openEdit,
+  BASE_URL,
 }) {
   const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ function User({
     );
     confirmDelete
       ? axios
-          .delete(`http://localhost:3001/api/v1/users/${id}`, {
+          .delete(`${BASE_URL}/api/v1/users/${id}`, {
             headers: {
               "Content-Type": "application/json",
               Authorization: sessionStorage.getItem("token"),

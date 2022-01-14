@@ -4,11 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import jwt from "jwt-decode";
 
-function Login({
-  getAllUsers,
-  // inputUserEmail,
-  // handleLogin
-}) {
+function Login({ getAllUsers, BASE_URL }) {
   const [errors, setErrors] = useState("");
   // const [userEmail, setUserEmail] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -43,7 +39,7 @@ function Login({
     } else {
       axios
         .post(
-          "http://localhost:3001/user_token",
+          `${BASE_URL}/user_token`,
           {
             auth: {
               email: userEmail,

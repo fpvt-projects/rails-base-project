@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -9,9 +9,15 @@ function Register({
   inputPassword,
   inputPasswordConfirmation,
   handleRegister,
+  error,
+  setError,
 }) {
   const navigate = useNavigate();
   const handleClickBack = () => navigate("/login");
+
+  useEffect(() => {
+    setError("");
+  }, []);
 
   return (
     <Container>
@@ -62,19 +68,32 @@ function Register({
               terms of agreement.
             </AgreementTag>
           </CheckboxDiv>
-
-          <InputDiv>
-            <FormButton onClick={handleRegister}>Register</FormButton>
-          </InputDiv>
-          <InputDiv>
-            <FormButton onClick={handleClickBack}>Back</FormButton>
-          </InputDiv>
+          <h1 style={{ color: "red", fontSize: "14px", textAlign: "center" }}>
+            {error}
+          </h1>
+          <ButtonContainer>
+            <InputDiv>
+              <FormButton onClick={handleRegister}>Register</FormButton>
+            </InputDiv>
+            <InputDiv>
+              <FormButton onClick={handleClickBack}>Back</FormButton>
+            </InputDiv>
+          </ButtonContainer>
         </FormDiv>
       </FormContainer>
     </Container>
   );
 }
 
+const ButtonContainer = styled.div`
+  position: absolute;
+  width: 700px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -87,11 +106,11 @@ const Container = styled.div`
 `;
 
 const FormContainer = styled.div`
-  max-width: 700px;
-  max-height: 400px;
-  width: 50%;
-  height: 50%;
+  max-height: 500px;
+  width: 800px;
+  height: 500px;
   background-color: white;
+  position: relative;
   padding: 10px;
   box-shadow: 0px 0px 22px -2px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 0px 0px 22px -2px rgba(0, 0, 0, 0.75);

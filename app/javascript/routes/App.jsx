@@ -20,6 +20,7 @@ function App() {
   const [password, setPassword] = useState("");
   const [password_confirmation, setPassword_confirmation] = useState("");
   const [admin, setAdmin] = useState(false);
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -45,8 +46,10 @@ function App() {
       : navigate("/login");
   };
 
+  const BASE_URL = "http://localhost:3001";
+
   const getAllUsers = () => {
-    fetch("http://localhost:3001/api/v1/users", {
+    fetch(`${BASE_URL}/api/v1/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -78,32 +81,48 @@ function App() {
   };
 
   const handleRegister = () => {
-    fetch("http://localhost:3001/api/v1/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        api_v1_users: {
-          firstname: firstname,
-          lastname: lastname,
-          email: email,
-          password: password,
-          password_confirmation: password_confirmation,
-          admin: admin,
+    if (
+      firstname == "" ||
+      lastname == "" ||
+      email == "" ||
+      password == "" ||
+      password_confirmation == ""
+    ) {
+      setError("Field empty");
+    } else {
+      fetch(`${BASE_URL}/api/v1/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      }),
-    })
-      .then((result) => {
-        console.log(result);
-        getAllUsers;
+        body: JSON.stringify({
+          api_v1_users: {
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            password: password,
+            password_confirmation: password_confirmation,
+            admin: admin,
+          },
+        }),
       })
-      .catch((error) => console.log(error));
+        .then((result) => {
+          console.log(result.status);
+          getAllUsers;
+
+          if (result.status == 422) {
+            setError("Email already taken!");
+          } else {
+            setError("");
+          }
+        })
+        .catch((error) => console.log(error));
+    }
   };
 
   const getAllCoins = () => {
     axios
-      .get("http://localhost:3001/crypto_currencies")
+      .get(`${BASE_URL}/crypto_currencies`)
       .then((res) => {
         let updatedCoinlist = [];
         res.data.data.forEach((coin) =>
@@ -152,10 +171,15 @@ function App() {
             user={user}
             getAllCoins={getAllCoins}
             coinlist={coinlist}
+            BASE_URL={BASE_URL}
+            error={error}
           />
         }
       />
-      <Route path="/login" element={<Login getAllUsers={getAllUsers} />} />
+      <Route
+        path="/login"
+        element={<Login getAllUsers={getAllUsers} BASE_URL={BASE_URL} />}
+      />
       <Route
         path="/sign_up"
         element={
@@ -166,6 +190,8 @@ function App() {
             inputPassword={inputPassword}
             inputPasswordConfirmation={inputPasswordConfirmation}
             handleRegister={handleRegister}
+            error={error}
+            setError={setError}
           />
         }
       />

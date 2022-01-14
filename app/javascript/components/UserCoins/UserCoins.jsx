@@ -4,7 +4,7 @@ import styled from "styled-components";
 import UserCoin from "./UserCoin";
 import jwt from "jwt-decode";
 
-function UserCoins({ getBalance, user }) {
+function UserCoins({ getBalance, user, BASE_URL }) {
   const [userCoins, setUserCoins] = useState([]);
 
   const getOwnedCoins = () => {
@@ -12,7 +12,7 @@ function UserCoins({ getBalance, user }) {
     const userid = user.id;
 
     axios
-      .get(`http://localhost:3001/portfolios/see_owned/${userid}`)
+      .get(`${BASE_URL}/portfolios/see_owned/${userid}`)
       .then((res) => {
         console.log(res.data.data);
         let updatedownedcoins = [];
@@ -49,6 +49,7 @@ function UserCoins({ getBalance, user }) {
             currency_amount={coin.currency_amount}
             getBalance={getBalance}
             getOwnedCoins={getOwnedCoins}
+            BASE_URL={BASE_URL}
           />
         ))}
       </Coinlist>

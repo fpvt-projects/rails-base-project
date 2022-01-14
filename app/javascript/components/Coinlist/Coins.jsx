@@ -8,6 +8,7 @@ function Coins({
   getBalance,
   getAllCoins,
   user,
+  BASE_URL,
 }) {
   return (
     <div>
@@ -35,6 +36,7 @@ function Coins({
             getBalance={getBalance}
             getAllCoins={getAllCoins}
             user={user}
+            BASE_URL={BASE_URL}
           />
         ))}
       </Coinlist>
