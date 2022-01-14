@@ -20,6 +20,7 @@ function App() {
   const [password, setPassword] = useState("");
   const [password_confirmation, setPassword_confirmation] = useState("");
   const [admin, setAdmin] = useState(false);
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -80,27 +81,43 @@ function App() {
   };
 
   const handleRegister = () => {
-    fetch(`${BASE_URL}/api/v1/users"`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        api_v1_users: {
-          firstname: firstname,
-          lastname: lastname,
-          email: email,
-          password: password,
-          password_confirmation: password_confirmation,
-          admin: admin,
+    if (
+      firstname == "" ||
+      lastname == "" ||
+      email == "" ||
+      password == "" ||
+      password_confirmation == ""
+    ) {
+      setError("Field empty");
+    } else {
+      fetch(`${BASE_URL}/api/v1/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      }),
-    })
-      .then((result) => {
-        console.log(result);
-        getAllUsers;
+        body: JSON.stringify({
+          api_v1_users: {
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            password: password,
+            password_confirmation: password_confirmation,
+            admin: admin,
+          },
+        }),
       })
-      .catch((error) => console.log(error));
+        .then((result) => {
+          console.log(result.status);
+          getAllUsers;
+
+          if (result.status == 422) {
+            setError("Email already taken!");
+          } else {
+            setError("");
+          }
+        })
+        .catch((error) => console.log(error));
+    }
   };
 
   const getAllCoins = () => {
@@ -155,6 +172,7 @@ function App() {
             getAllCoins={getAllCoins}
             coinlist={coinlist}
             BASE_URL={BASE_URL}
+            error={error}
           />
         }
       />
@@ -172,6 +190,8 @@ function App() {
             inputPassword={inputPassword}
             inputPasswordConfirmation={inputPasswordConfirmation}
             handleRegister={handleRegister}
+            error={error}
+            setError={setError}
           />
         }
       />

@@ -26,6 +26,7 @@ function Home({
   coinlist,
   getAllCoins,
   BASE_URL,
+  error,
 }) {
   const navigate = useNavigate();
 
@@ -82,6 +83,7 @@ function Home({
                 getAllUsers={getAllUsers}
                 user={user}
                 BASE_URL={BASE_URL}
+                error={error}
               />
             }
           />
