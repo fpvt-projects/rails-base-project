@@ -173,6 +173,7 @@ function App() {
             coinlist={coinlist}
             BASE_URL={BASE_URL}
             error={error}
+            setError={setError}
           />
         }
       />

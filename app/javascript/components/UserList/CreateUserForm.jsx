@@ -19,6 +19,8 @@ function CreateUserForm({
   getAllUsers,
   sidebar,
   openSideBar,
+  error,
+  setError,
 }) {
   // const [userType, setUserType] = useState("");
 
@@ -49,8 +51,12 @@ function CreateUserForm({
     handleRegister();
     getAllUsers();
     emtpyForm();
-    openSideBar();
     navigate("/user-list");
+  };
+
+  const handleBack = () => {
+    setError("");
+    openSideBar();
   };
 
   const ClearForm = () => alert("Form cleared!");
@@ -67,6 +73,16 @@ function CreateUserForm({
     <div id="Container" style={Container}>
       <FormContainer>
         <h1 style={{ marginBotton: "10px" }}>ADD NEW USER</h1>
+        <h1
+          style={{
+            fontSize: "14px",
+            color: "red",
+            marginTop: "10px",
+            marginBottom: "10px",
+          }}
+        >
+          {error}
+        </h1>
         <UserInput
           onChange={(e) => inputFirstname(e.target.value)}
           type="text"
@@ -103,7 +119,7 @@ function CreateUserForm({
         </DropdownSelect>
         <SubmitBttn onClick={handleClickRegister}>Save</SubmitBttn>
         <ClearBttn onClick={ClearForm}>Clear</ClearBttn>
-        <BackBttn onClick={openSideBar}>Back</BackBttn>
+        <BackBttn onClick={handleBack}>Back</BackBttn>
       </FormContainer>
     </div>
   );
@@ -190,7 +206,7 @@ const BackBttn = styled.button`
   outline: none;
   border: none;
   border-radius: 5px;
-  background-color: #5ea8ed;
+  background-color: #b7a7a7;
   text-transform: uppercase;
   cursor: pointer;
   font-weight: bold;
@@ -198,7 +214,7 @@ const BackBttn = styled.button`
   transition: all 0.4s ease;
 
   :hover {
-    background-color: #4784bc;
+    background-color: #8c8181;
   }
 `;
 
