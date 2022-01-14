@@ -7,9 +7,10 @@ class Portfolio < ApplicationRecord
           elsif transaction.txn_type == 'sell'
             amount = transaction.currency_amount * -1
           end
-            if Portfolio.exists?(currency_symbol: transaction.currency_symbol)
-                sym = Portfolio.find_by(currency_symbol: transaction.currency_symbol)
-                Portfolio.update(sym.id,
+            current_user = User.find(transaction.user_id)
+            if current_user.portfolio.exists?(currency_symbol: transaction.currency_symbol)
+                sym = current_user.portfolio.find_by(currency_symbol: transaction.currency_symbol)
+                current_user.portfolio.update(sym.id,
                 {
                     :currency_amount => sym.currency_amount + amount
                 })
