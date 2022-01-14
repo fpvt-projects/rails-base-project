@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Transactions from "./Transactions/Transactions";
+import styled from "styled-components";
 
 function TransactionHistory() {
   const [transactions, setTransactions] = useState([]);
@@ -30,10 +31,15 @@ function TransactionHistory() {
   }, []);
 
   return (
-    <div>
+    <Container>
       <Transactions transactions={transactions} />
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 export default TransactionHistory;

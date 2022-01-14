@@ -36,9 +36,13 @@ function Trade({ coinlist, getAllCoins, user }) {
   const getQuoteOfTheDay = () => {
     axios
       .get("http://localhost:3001/api/v1/todayQuotes", {
-        headers: { "Content-Type": "application/json" },
+        headers: { accept: "application/json" },
       })
-      .then((result) => console.log(result))
+      .then((result) =>
+        setQuote(
+          `"${result.data.quote.data[0].q}" - ${result.data.quote.data[0].a}`
+        )
+      )
       .catch((error) => console.log(error));
   };
 
@@ -59,6 +63,8 @@ function Trade({ coinlist, getAllCoins, user }) {
           <h1>$ 32,150.59</h1>
 
           <p>Current balance: {currentBalance}</p>
+
+          <DailyQuotes>{quote}</DailyQuotes>
         </TotalAssetContainer>
       </MiscContainer>
       <MarketContainer>
@@ -109,6 +115,7 @@ const TotalAssetContainer = styled.div`
   align-items: center;
   justify-content: center;
   border-left: 2px solid #e0e0e0;
+  position: relative;
 `;
 
 const MarketContainer = styled.div`
@@ -133,5 +140,12 @@ const NavButtons = styled.button`
   :hover {
     background-color: gray;
   }
+`;
+
+const DailyQuotes = styled.p`
+  position: absolute;
+  font-size: 10px;
+  font-weight: bold;
+  bottom: 10px;
 `;
 export default Trade;
