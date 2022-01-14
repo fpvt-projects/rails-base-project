@@ -27,6 +27,7 @@ function Home({
   getAllCoins,
   BASE_URL,
   error,
+  setError,
 }) {
   const navigate = useNavigate();
 
@@ -84,6 +85,7 @@ function Home({
                 user={user}
                 BASE_URL={BASE_URL}
                 error={error}
+                setError={setError}
               />
             }
           />

@@ -25,6 +25,7 @@ function UserList({
   user,
   BASE_URL,
   error,
+  setError,
 }) {
   const [sidebar, setSidebar] = useState(false);
 
@@ -66,6 +67,7 @@ function UserList({
         sidebar={sidebar}
         openSideBar={openSideBar}
         error={error}
+        setError={setError}
       />
     </Container>
   );
