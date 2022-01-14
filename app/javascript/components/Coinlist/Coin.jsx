@@ -14,7 +14,6 @@ function Coin({
   getBalance,
   user,
 }) {
-  const [showBuyForm, setShowBuyForm] = useState(false);
   const [amount, setAmount] = useState("");
 
   const handleInput = (e) => {
@@ -43,19 +42,16 @@ function Coin({
           console.log(res);
           getAllCoins();
           getBalance();
+          setAmount("");
         })
         .catch((error) => console.log(error));
     }
   };
 
-  const toggleBuyForm = () => {
-    setShowBuyForm(!showBuyForm);
-  };
-
   useEffect(() => {}, []);
 
   return (
-    <Container onClick={toggleBuyForm}>
+    <Container>
       <ColumnCurrencyName>
         {currency_name}
         <ContractID>{contract_id}</ContractID>
@@ -65,7 +61,7 @@ function Coin({
       <Column>{market_cap}</Column>
       <Column>{currency_price}</Column>
       <Column>
-        <Input type="text" onChange={handleInput} />
+        <Input type="text" value={amount} onChange={handleInput} />
       </Column>
       <Column>
         <Button amount={amount} onClick={handleBuy}>
