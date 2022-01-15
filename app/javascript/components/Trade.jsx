@@ -53,7 +53,7 @@ function Trade({ coinlist, getAllCoins, user, BASE_URL }) {
         headers: { accept: "application/json" },
       })
       .then((answer) =>
-      // setTime(`${answer.data.data.datetime}`)
+      // setTime(`${answer.data.data}`)
       console.log(answer.data)
       ) 
   }
