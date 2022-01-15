@@ -49,8 +49,8 @@ coin = CryptoCurrency.create(
         {
             currency_name: 'Bomb-Crypto',
             currency_symbol: 'BCOIN',
-            total_supply: '100000000',
-            market_cap: '100000',
+            total_supply: '100000',
+            market_cap: '10000',
             currency_description: 'Coin For Dodge',
             currency_price: '0.001'
         },
@@ -59,8 +59,8 @@ coin = CryptoCurrency.create(
         {
             currency_name: 'Polygon',
             currency_symbol: 'Matic',
-            total_supply: '10000000000',
-            market_cap: '15000000000',
+            total_supply: '10000000',
+            market_cap: '15000000',
             currency_description: 'Coin For Dodge',
             currency_price: '1.5'
         },
