@@ -46,7 +46,7 @@ function App() {
       : navigate("/login");
   };
 
-  const BASE_URL = "http://localhost:3001";
+  const BASE_URL = "https://crypto-trading-project-avion.herokuapp.com"
 
   const getAllUsers = () => {
     fetch(`${BASE_URL}/api/v1/users`, {

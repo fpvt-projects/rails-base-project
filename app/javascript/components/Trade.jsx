@@ -49,7 +49,7 @@ function Trade({ coinlist, getAllCoins, user, BASE_URL }) {
 
   const getTime = () => {
     axios
-      .get("http://localhost:3001/api/v1/philippinesTime", {
+      .get("https://crypto-trading-project-avion.herokuapp.com/api/v1/philippinesTime", {
         headers: { accept: "application/json" },
       })
       .then((answer) =>
